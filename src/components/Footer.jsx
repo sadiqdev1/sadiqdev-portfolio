@@ -4,9 +4,9 @@ const socials = [
   { icon: <FaGithub />, label: 'GitHub', href: 'https://github.com/dev-anna-life' },
   { icon: <FaLinkedinIn />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/annastesia-amarachi-ugwuanyi-3318a3390/?' },
   { icon: <FaTwitter />, label: 'Twitter', href: 'https://x.com/Dev_Anna20/' },
-  { icon: <FaInstagram />, label: 'Instagram', href: '#' },
-  { icon: <FaFacebook />, label: 'Facebook', href: '#' },
-  { icon: <FaTiktok />, label: 'Tiktok', href: '#' },
+  { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/devanna_22?' },
+  { icon: <FaFacebook />, label: 'Facebook', href: 'https://www.facebook.com/profile.php?' },
+  { icon: <FaTiktok />, label: 'Tiktok', href: 'https://www.tiktok.com/@itsanna136?' },
 ]
 
 export default function Footer() {

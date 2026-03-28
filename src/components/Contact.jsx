@@ -10,10 +10,9 @@ const socials = [
     { icon: <FaGithub />, label: 'GitHub', href: 'https://github.com/dev-anna-life' },
     { icon: <FaLinkedinIn />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/annastesia-amarachi-ugwuanyi-3318a3390/' },
     { icon: <FaTwitter />, label: 'Twitter', href: 'https://x.com/Dev_Anna20/' },
-    { icon: <FaInstagram />, label: 'Instagram', href: '#' },
-    { icon: <FaFacebook />, label: 'Facebook', href: '#' },
-    { icon: <FaTiktok />, label: 'Tiktok', href: '#' },
-    { icon: <FaWhatsapp />, label: 'Whatsapp', href: 'https://wa.me/2348146790636' },
+    { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/devanna_22?' },
+    { icon: <FaFacebook />, label: 'Facebook', href: 'https://www.facebook.com/profile.php?' },
+    { icon: <FaTiktok />, label: 'Tiktok', href: 'https://www.tiktok.com/@itsanna136?' },
 ]
 
 export default function Contact() {
@@ -160,7 +159,7 @@ export default function Contact() {
                                     name="name"
                                     value={form.name}
                                     onChange={handleChange}
-                                    placeholder="Your full name"
+                                    placeholder="Your Full Name"
                                     className={`px-4 py-3 rounded-xl border text-sm outline-none transition-colors bg-white text-rose placeholder:text-rose/30 ${errors.name ? 'border-red-400 bg-red-50' : 'border-blush/25 focus:border-blush'}`}
                                 />
                                 {errors.name && <span className="text-red-400 text-xs">{errors.name}</span>}
@@ -229,7 +228,7 @@ export default function Contact() {
                                 target="_blank"
                                 rel="noreferrer"
                                 title={s.label}
-                                className="w-11 h-11 rounded-full border border-blush/20 bg-white text-rose text-lg flex items-center justify-center hover:-translate-y-1 hover:bg-blush hover:text-white hover:border-blush transition-all duration-200"
+                                className="w-11 h-11 rounded-full border border-blush/20 bg-white text-rose text-lg flex items-center justify-center hover:-translate-y-1 hover:bg-rose hover:text-white hover:border-blush transition-all duration-200"
                             >
                                 {s.icon}
                             </a>

@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        blush: '#FF7782',
+        blush: '#DCA1A1',
         rose: '#735259',
         cream: '#FFFFFF',
         black: '#181818'
