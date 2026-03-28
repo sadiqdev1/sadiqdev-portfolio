@@ -22,7 +22,7 @@ const projects = [
     name: 'Multi-Preneur',
     tags: ['HTML', 'Tailwind', 'JavaScript'],
     desc: 'A multi-entrepreneur landing page with responsive layouts and Tailwind styling.',
-    link: 'https://github.com/dev-anna-life/Multi-Preneur',
+    link: 'https://dev-anna-life.github.io/Multi-Preneur/',
   },
 ]
 
