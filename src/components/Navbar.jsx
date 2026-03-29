@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 bg-white/90 backdrop-blur-md border-b border-blush/10">
-      
+
       <div className="flex justify-between items-center">
 
         <span className="font-display font-black text-xl text-rose tracking-tight">
@@ -37,6 +37,15 @@ export default function Navbar() {
             Let's Talk →
           </a>
 
+          <a
+            href="/resume.pdf"
+            download
+            onClick={() => setOpen(false)}
+            className="border border-blush text-blush px-6 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
+          >
+            Download CV ↓
+          </a>
+
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden text-rose text-2xl focus:outline-none"
@@ -48,9 +57,8 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`md:hidden absolute left-0 w-full bg-white shadow-md transition-all duration-300 overflow-hidden ${
-          open ? "max-h-[500px] py-6" : "max-h-0"
-        }`}
+        className={`md:hidden absolute left-0 w-full bg-white shadow-md transition-all duration-300 overflow-hidden ${open ? "max-h-[500px] py-6" : "max-h-0"
+          }`}
       >
         <ul className="flex flex-col items-center gap-6">
           {links.map(link => (
@@ -74,6 +82,6 @@ export default function Navbar() {
           </a>
         </ul>
       </div>
-    </nav>
+    </nav >
   )
 }

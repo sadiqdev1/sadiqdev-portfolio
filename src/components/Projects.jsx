@@ -37,14 +37,6 @@ export default function Projects() {
               Things I've built
             </h2>
           </div>
-          
-          < a
-            href="/resume.pdf"
-            download
-            className="hidden md:flex items-center gap-2 border border-blush text-blush px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-rose hover:text-white transition-all duration-200"
-          >
-            Download CV ↓
-          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
