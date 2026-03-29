@@ -32,7 +32,7 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="bg-blush text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-rose transition-colors duration-200"
+            className="md:inline-block bg-blush text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-rose transition-colors duration-200"
           >
             Let's Talk →
           </a>
