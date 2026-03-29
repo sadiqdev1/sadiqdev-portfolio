@@ -20,7 +20,7 @@ export default function About() {
           </h2>
           <p className="text-white/80 leading-relaxed mb-4">
             I'm Ugwuanyi Annastesia Amarachi but the internet knows me as{' '}
-            <strong className="text-rose">Dev Anna</strong>. I'm a passionate frontend developer
+            <strong className="text-rose">Dev Anna</strong>. I'm a passionate website developer
             who believes every website should feel delightful and every click should spark joy.
           </p>
           <p className="text-rose leading-relaxed">

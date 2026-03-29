@@ -1,7 +1,6 @@
 export default function Hero() {
     return (
         <section id="hero" className="min-h-screen pt-28 pb-16 px-8 md:px-16 bg-rose grid md:grid-cols-2 gap-12 items-center">
-            {/* left*/}
             <div>
                 <div className="inline-flex items-center gap-2 bg-blush/10 text-blush text-xs font-semibold px-4 py-2 rounded-full mb-6 animate-fadeUp">
                     <span className="w-2 h-2 bg-blush rounded-full animate-pulse" />
@@ -32,6 +31,7 @@ export default function Hero() {
                     </a>
                 </div>
             </div>
+            
 
             <div className="flex justify-center items-center relative animate-fadeUp" style={{ animationDelay: '0.4s' }}>
                 <div className="w-72 h-80 bg-blush/10 animate-morph flex items-center justify-center text-8xl border-2 border-blush/20">
