@@ -17,33 +17,33 @@ export default function Navbar() {
         <ul className="hidden md:flex gap-8 list-none">
           {links.map(link => (
             <li key={link}>
+              
               <a
                 href={`#${link.toLowerCase()}`}
                 className="text-rose/70 text-lg font-medium hover:text-blush transition-colors duration-200 relative group"
               >
                 {link}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blush transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blush transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-4">
-
-          <a
-            href="#contact"
-            className="md:inline-block bg-blush text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-rose transition-colors duration-200"
-          >
-            Let's Talk →
-          </a>
-
-          <a
+        <div className="flex items-center gap-3">
+          
+            <a
             href="/resume.pdf"
             download
-            onClick={() => setOpen(false)}
-            className="border border-blush text-blush px-6 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
+            className="hidden md:inline-flex border border-blush text-blush px-5 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
           >
             Download CV ↓
+          </a>
+          
+          <a
+            href="#contact"
+            className="hidden md:inline-block bg-blush text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-rose transition-colors duration-200"
+          >
+            Let's Talk →
           </a>
 
           <button
@@ -52,17 +52,19 @@ export default function Navbar() {
           >
             {open ? "✕" : "☰"}
           </button>
-
         </div>
       </div>
 
+      {/* Mobile dropdown */}
       <div
-        className={`md:hidden absolute left-0 w-full bg-white shadow-md transition-all duration-300 overflow-hidden ${open ? "max-h-[500px] py-6" : "max-h-0"
-          }`}
+        className={`md:hidden absolute left-0 w-full bg-white shadow-md transition-all duration-300 overflow-hidden ${
+          open ? "max-h-[500px] py-6" : "max-h-0"
+        }`}
       >
         <ul className="flex flex-col items-center gap-6">
           {links.map(link => (
             <li key={link}>
+              
               <a
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setOpen(false)}
@@ -80,8 +82,17 @@ export default function Navbar() {
           >
             Let's Talk →
           </a>
+
+          <a 
+            href="/resume.pdf"
+            download
+            onClick={() => setOpen(false)}
+            className="border border-blush text-blush px-6 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
+          >
+            Download CV ↓
+          </a>
         </ul>
       </div>
-    </nav >
+    </nav>
   )
 }
