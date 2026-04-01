@@ -58,7 +58,7 @@ export default function Skills() {
         <section id="skills" className="py-24 px-8 md:px-16 bg-rose">
             <div className="max-w-5xl mx-auto">
                 <div className="reveal mb-16">
-                    <p className="text-blush text-xs font-bold uppercase tracking-widest mb-3">Skills</p>
+                    <p className="text-blush font-bold uppercase tracking-widest mb-6">Skills</p>
                     <h2 className="font-display font-black text-4xl md:text-5xl text-white leading-tight">
                         Tools I bring to every project
                     </h2>
@@ -78,7 +78,7 @@ export default function Skills() {
                     ))}
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-0 reveal">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
                     {skills.map((skill) => {
                         const Icon = skill.icon
                         return (

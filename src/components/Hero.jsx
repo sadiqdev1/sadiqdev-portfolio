@@ -10,12 +10,12 @@ export default function Hero() {
                 <h1 className="font-display font-black text-5xl md:text-6xl leading-tight text-cream tracking-tight animate-fadeUp"
                     style={{ animateDelay: '0.1s' }}>
                     Hi, I'm <br />
-                    <span className="inline-block italic text-black mb-8">Dev Anna.</span>
+                    <span className="inline-block italic text-blush mb-8">Dev Anna.</span>
                     <br />
                     I build the web<br />beautifully
                 </h1>
 
-                <p className="text-black text-base leading-relaxed mt-6 mb-8 max-w-md animate-fadeup"
+                <p className="text-blush text-base leading-relaxed mt-6 mb-8 max-w-md animate-fadeup"
                     style={{ animateDelay: '0.2s' }}>
                     Web Developer crafting pixel-perfect, elegant interfaces. I turn into interactive realities with HTML, CSS3, Tailwind-CSS, JavaScript, & React.
                 </p>
