@@ -1,98 +1,140 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
-  const links = ['About', 'Skills', 'Hero', 'Projects', 'Contact']
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (saved === 'light') {
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+    } else if (saved === 'dark') {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    } else if (prefersDark) {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newDark = !isDark;
+    setIsDark(newDark);
+    if (newDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  const links = ['About', 'Skills', 'Projects', 'Contact'];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 bg-white/90 backdrop-blur-md border-b border-blush/10">
-
-      <div className="flex justify-between items-center">
-
-        <span className="font-display font-black text-xl text-rose tracking-tight">
-          Dev Anna<span className="text-blush">.</span>
+    <nav style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 50,
+      padding: '1rem 1.5rem',
+      backgroundColor: 'var(--bg-primary)',
+      borderBottom: '1px solid var(--border-color)',
+      backdropFilter: 'blur(8px)',
+      transition: 'background-color 0.3s ease'
+    }} className="md:px-12">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: '1.5rem', color: 'var(--text-primary)' }}>
+          Sadiq<span style={{ color: 'var(--accent)' }}>Dev</span>
         </span>
 
-        <ul className="hidden md:flex gap-8 list-none">
+        <ul style={{ display: 'none', gap: '2rem', listStyle: 'none' }} className="md:flex">
           {links.map(link => (
             <li key={link}>
-              
-              <a
-                href={`#${link.toLowerCase()}`}
-                className="text-rose/70 text-lg font-medium hover:text-blush transition-colors duration-200 relative group"
-              >
+              <a href={`#${link.toLowerCase()}`} style={{ color: 'var(--text-secondary)', fontWeight: 500, transition: 'color 0.2s' }}
+                onMouseEnter={e => e.target.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
                 {link}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blush transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
-          
-            <a
-            href="/resume.pdf"
-            download
-            className="hidden md:inline-flex border border-blush text-blush px-5 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
-          >
-            Download CV ↓
-          </a>
-          
-          <a
-            href="#contact"
-            className="hidden md:inline-block bg-blush text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-rose transition-colors duration-200"
-          >
-            Let's Talk →
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          <button onClick={toggleTheme} style={{
+            padding: '0.5rem',
+            borderRadius: '0.375rem',
+            backgroundColor: 'var(--bg-secondary)',
+            color: 'var(--text-primary)',
+            fontSize: '1.25rem'
+          }}>
+            {isDark ? '☀️' : '🌙'}
+          </button>
+
+          <a href="/resume.pdf" download style={{
+            display: 'none',
+            border: '1px solid var(--border-color)',
+            padding: '0.5rem 1.25rem',
+            borderRadius: '0.375rem',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: 'var(--text-secondary)'
+          }} className="md:inline-flex">
+            Resume ↓
           </a>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden text-rose text-2xl focus:outline-none"
-          >
-            {open ? "✕" : "☰"}
+          <a href="#contact" style={{
+            display: 'none',
+            backgroundColor: 'var(--accent)',
+            padding: '0.5rem 1.25rem',
+            borderRadius: '0.375rem',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: '#fff'
+          }} className="md:inline-block">
+            Contact →
+          </a>
+
+          <button onClick={() => setOpen(!open)} style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} className="md:hidden">
+            {open ? '✕' : '☰'}
           </button>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
-      <div
-        className={`md:hidden absolute left-0 w-full bg-white shadow-md transition-all duration-300 overflow-hidden ${
-          open ? "max-h-[500px] py-6" : "max-h-0"
-        }`}
-      >
-        <ul className="flex flex-col items-center gap-6">
-          {links.map(link => (
-            <li key={link}>
-              
-              <a
-                href={`#${link.toLowerCase()}`}
-                onClick={() => setOpen(false)}
-                className="text-rose text-lg font-medium hover:text-blush transition-colors"
-              >
-                {link}
-              </a>
-            </li>
-          ))}
-
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="bg-blush text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-rose transition-colors"
-          >
-            Let's Talk →
-          </a>
-
-          <a 
-            href="/resume.pdf"
-            download
-            onClick={() => setOpen(false)}
-            className="border border-blush text-blush px-6 py-2 rounded-full text-sm font-medium hover:bg-blush hover:text-white transition-all duration-200"
-          >
-            Download CV ↓
-          </a>
-        </ul>
-      </div>
+      {open && (
+        <div style={{
+          position: 'absolute',
+          left: 0,
+          top: '100%',
+          width: '100%',
+          backgroundColor: 'var(--bg-primary)',
+          borderTop: '1px solid var(--border-color)',
+          padding: '1.5rem 0'
+        }}>
+          <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+            {links.map(link => (
+              <li key={link}>
+                <a href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)} style={{ color: 'var(--text-secondary)', fontSize: '1.125rem' }}>
+                  {link}
+                </a>
+              </li>
+            ))}
+            <a href="#contact" onClick={() => setOpen(false)} style={{ backgroundColor: 'var(--accent)', color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '0.375rem' }}>
+              Contact →
+            </a>
+            <a href="/resume.pdf" download onClick={() => setOpen(false)} style={{ border: '1px solid var(--border-color)', padding: '0.5rem 1.5rem', borderRadius: '0.375rem', color: 'var(--text-secondary)' }}>
+              Resume ↓
+            </a>
+          </ul>
+        </div>
+      )}
     </nav>
-  )
+  );
 }

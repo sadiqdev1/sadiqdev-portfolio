@@ -1,45 +1,49 @@
-import { FaGithub, FaLinkedinIn, FaTwitter, FaInstagram, FaFacebook, FaTiktok, FaWhatsapp } from 'react-icons/fa'
-
-const socials = [
-  { icon: <FaGithub />, label: 'GitHub', href: 'https://github.com/dev-anna-life' },
-  { icon: <FaLinkedinIn />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/annastesia-amarachi-ugwuanyi-3318a3390/?' },
-  { icon: <FaTwitter />, label: 'Twitter', href: 'https://x.com/Dev_Anna20/' },
-  { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/devanna_22?' },
-  { icon: <FaFacebook />, label: 'Facebook', href: 'https://www.facebook.com/profile.php?' },
-  { icon: <FaTiktok />, label: 'Tiktok', href: 'https://www.tiktok.com/@itsanna136?' },
-]
-
 export default function Footer() {
-  
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="px-8 md:px-16 py-8 bg-white">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-
-        <span className="font-display font-black text-xl text-rose">
-          Dev Anna<span className="text-blush">.</span>
+    <footer
+      style={{
+        padding: '2rem 1.5rem',
+        backgroundColor: 'var(--bg-secondary)',
+        borderTop: '1px solid var(--border-color)',
+        transition: 'background-color 0.3s ease',
+        textAlign: 'center',
+      }}
+      className="md:px-12"
+    >
+      <div
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.75rem',
+        }}
+      >
+        {/* Brand */}
+        <span
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 800,
+            fontSize: '1.25rem',
+            color: 'var(--text-primary)',
+          }}
+        >
+          Sadiq<span style={{ color: 'var(--accent)' }}>Dev</span>
         </span>
 
-        <div className="flex gap-3">
-          {socials.map(s => (
-
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noreferrer"
-              title={s.label}
-              className="w-10 h-10 rounded-full border border-rose text-white text-base bg-rose flex items-center justify-center hover:-translate-y-1 hover:bg-blush hover:border-blush transition-all duration-200"
-            >
-              {s.icon}
-            </a>
-          ))}
-        </div>
-
-        <span className="text-rose text-xs">
-          © 2026 Ugwuanyi Annastesia Amarachi
+        {/* Copyright */}
+        <span
+          style={{
+            fontSize: '0.75rem',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          © {currentYear} SadiqDev. All rights reserved.
         </span>
-
       </div>
     </footer>
-  )
+  );
 }
