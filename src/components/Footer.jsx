@@ -22,19 +22,22 @@ export default function Footer() {
           gap: '0.75rem',
         }}
       >
-        {/* Brand */}
+        {/* Brand with hover effect */}
         <span
           style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 800,
             fontSize: '1.25rem',
             color: 'var(--text-primary)',
+            transition: 'color 0.2s',
+            cursor: 'default',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
         >
           Sadiq<span style={{ color: 'var(--accent)' }}>Dev</span>
         </span>
 
-        {/* Copyright */}
         <span
           style={{
             fontSize: '0.75rem',

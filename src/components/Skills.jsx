@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub } from "react-icons/fa";
 import { SiTailwindcss, SiLaravel, SiPhp, SiMysql, SiJquery, SiBootstrap } from "react-icons/si";
 import { MdDevices } from "react-icons/md";
@@ -12,95 +13,80 @@ const skills = [
   { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38BDF8', desc: 'Utility-first rapid styling.' },
   { name: 'Responsive Design', icon: MdDevices, color: 'var(--accent)', desc: 'Fluid layouts for all screens.' },
   { name: 'Git', icon: FaGitAlt, color: '#F05032', desc: 'Distributed version control.' },
-  { name: 'GitHub', icon: FaGithub, color: '#24292f', desc: 'Collaboration & hosting.' }, // brand color
+  { name: 'GitHub', icon: FaGithub, color: '#24292f', desc: 'Collaboration & hosting.' },
   { name: 'MySQL', icon: SiMysql, color: '#4479A1', desc: 'Relational database management.' },
   { name: 'jQuery', icon: SiJquery, color: '#0769AD', desc: 'Fast, concise JS library.' },
   { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3', desc: 'Popular CSS framework.' },
 ];
 
 const stats = [
-  { value: '4+', label: 'Years Experience' },
-  { value: '12+', label: 'Projects Deployed' },
-  { value: '15+', label: 'Technologies' },  // bumped for accuracy
-  { value: '100%', label: 'Commitment' },
+  { value: 4, label: 'Years Experience', suffix: '+' },
+  { value: 12, label: 'Projects Deployed', suffix: '+' },
+  { value: 15, label: 'Technologies', suffix: '+' },
+  { value: 100, label: 'Commitment', suffix: '%' },
 ];
 
 export default function Skills() {
+  const [counters, setCounters] = useState(stats.map(() => 0));
+  const statsRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          stats.forEach((stat, idx) => {
+            let start = 0;
+            const end = stat.value;
+            const duration = 1500;
+            const stepTime = Math.abs(Math.floor(duration / end));
+            const timer = setInterval(() => {
+              start += 1;
+              setCounters(prev => {
+                const newCounters = [...prev];
+                newCounters[idx] = start;
+                return newCounters;
+              });
+              if (start === end) clearInterval(timer);
+            }, stepTime);
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      id="skills"
-      style={{
-        padding: '5rem 1rem',
-        backgroundColor: 'var(--bg-primary)',
-        transition: 'background-color 0.3s ease',
-      }}
-      className="md:px-12"
-    >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <section id="skills" className="py-20 px-4 md:px-12 bg-[var(--bg-primary)] transition-colors duration-300">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="reveal" style={{ marginBottom: '3rem' }}>
-          <p style={{
-            color: 'var(--accent)',
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            marginBottom: '0.75rem',
-          }}>
+        <div className="reveal mb-12">
+          <p className="text-[var(--accent)] text-xs font-semibold tracking-wider uppercase mb-3">
             Skills
           </p>
-          <h2 style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 800,
-            fontSize: '1.8rem',
-            lineHeight: 1.2,
-            color: 'var(--text-primary)',
-          }} className="md:text-4xl">
+          <h2 className="font-sans font-extrabold text-3xl md:text-4xl text-[var(--text-primary)]">
             Core Technologies
           </h2>
         </div>
 
-        {/* Stats cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-          gap: '1rem',
-          marginBottom: '3rem',
-        }} className="reveal">
-          {stats.map((stat) => (
+        {/* Stats cards with counter */}
+        <div
+          ref={statsRef}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 reveal"
+        >
+          {stats.map((stat, idx) => (
             <div
               key={stat.label}
-              style={{
-                border: '1px solid var(--border-color)',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                textAlign: 'center',
-                transition: 'border-color 0.2s, transform 0.2s',
-                cursor: 'default',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="border border-[var(--border-color)] rounded-lg p-4 text-center transition-all duration-200 cursor-default bg-[var(--bg-secondary)] hover:border-[var(--accent)] hover:-translate-y-0.5"
             >
-              <div style={{
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 800,
-                fontSize: '2rem',
-                color: 'var(--accent)',
-                marginBottom: '0.25rem',
-              }}>
-                {stat.value}
+              <div className="font-sans font-extrabold text-3xl text-[var(--accent)] mb-1">
+                {counters[idx]}
+                {stat.suffix}
               </div>
-              <div style={{
-                fontSize: '0.7rem',
-                color: 'var(--text-secondary)',
-                fontWeight: 500,
-              }}>
+              <div className="text-xs text-[var(--text-secondary)] font-medium">
                 {stat.label}
               </div>
             </div>
@@ -108,78 +94,52 @@ export default function Skills() {
         </div>
 
         {/* Skills grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-          gap: '1rem',
-        }} className="reveal">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 reveal">
           {skills.map((skill) => {
             const Icon = skill.icon;
             return (
               <div
                 key={skill.name}
-                style={{
-                  position: 'relative',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '0.5rem',
-                  padding: '1.25rem',
-                  overflow: 'hidden',
-                  transition: 'border-color 0.2s, transform 0.2s',
-                  cursor: 'default',
-                  backgroundColor: 'var(--bg-secondary)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-color)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                className="group relative border border-[var(--border-color)] rounded-lg p-5 overflow-hidden transition-all duration-200 cursor-default bg-[var(--bg-secondary)] hover:border-[var(--accent)] hover:-translate-y-0.5"
               >
+                {/* Glow effect */}
                 <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    opacity: 0,
-                    transition: 'opacity 0.3s',
-                    background: `radial-gradient(circle at 30% 20%, ${skill.color}20, transparent)`,
-                    pointerEvents: 'none',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}
+                  className="absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none group-hover:opacity-100"
+                  style={{ background: `radial-gradient(circle at 30% 20%, ${skill.color}20, transparent)` }}
                 />
-                <div style={{
-                  fontSize: '2.5rem',
-                  marginBottom: '0.75rem',
-                  transition: 'transform 0.2s',
-                  color: skill.color,
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                {/* Icon with floating animation */}
+                <div
+                  className="text-4xl mb-3 transition-transform duration-200 group-hover:scale-105 animate-float"
+                  style={{ color: skill.color }}
+                >
                   <Icon aria-hidden="true" />
                 </div>
-                <h3 style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                  marginBottom: '0.5rem',
-                  color: 'var(--text-primary)',
-                }}>
+                <h3 className="font-sans font-bold text-base mb-1 text-[var(--text-primary)]">
                   {skill.name}
                 </h3>
-                <p style={{
-                  fontSize: '0.7rem',
-                  lineHeight: 1.4,
-                  color: 'var(--text-secondary)',
-                }}>
+                <p className="text-xs leading-relaxed text-[var(--text-secondary)]">
                   {skill.desc}
                 </p>
+                {/* Tooltip on hover */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[var(--bg-primary)] text-[var(--text-primary)] text-xs rounded shadow-md border border-[var(--border-color)] whitespace-nowrap opacity-0 transition-opacity duration-200 pointer-events-none z-10 group-hover:opacity-100">
+                  {skill.desc}
+                </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Add floating animation keyframes globally (add to index.css) */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

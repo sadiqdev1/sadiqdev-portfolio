@@ -1,9 +1,10 @@
 import { FiCode, FiZap, FiMonitor, FiGlobe } from 'react-icons/fi';
+import profileImg from '../assets/profile.jpg';
 
 const stats = [
   { value: '8+', label: 'Projects Completed' },
-  { value: '5+', label: 'Technologies Mastered' },
-  { value: '100%', label: 'Commitment to Quality' },
+  { value: '10+', label: 'Technologies' },
+  { value: '100%', label: 'Commitment' },
 ];
 
 const cards = [
@@ -18,10 +19,10 @@ export default function About() {
     <section
       id="about"
       style={{
-        padding: '6rem 1rem',      // reduced horizontal padding on mobile
+        padding: '6rem 1rem',
         backgroundColor: 'var(--bg-primary)',
         transition: 'background-color 0.3s ease',
-        overflowX: 'hidden',       // kill horizontal scroll
+        overflowX: 'hidden',
         width: '100%',
       }}
       className="md:px-12 sm:px-6"
@@ -32,15 +33,42 @@ export default function About() {
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: '1fr',
-          gap: '3rem',             // smaller gap on mobile
+          gap: '3rem',
           alignItems: 'center',
           marginBottom: '4rem',
           width: '100%',
         }}
         className="md:grid-cols-2 md:gap-12"
       >
-        {/* Left side - About text */}
+        {/* Left side - About text + Portrait */}
         <div className="reveal">
+          {/* Portrait image with hover scale */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '1.5rem',
+            }}
+          >
+            <img
+              src={profileImg}
+              alt="Abubakar Ibrahim - Full‑Stack Developer"
+              loading="lazy"
+              style={{
+                width: '150px',
+                height: '150px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid var(--accent)',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)',
+                transition: 'transform 0.3s ease',
+                backgroundColor: 'var(--bg-secondary)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            />
+          </div>
+
           <p
             style={{
               color: 'var(--accent)',
@@ -49,6 +77,7 @@ export default function About() {
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               marginBottom: '0.75rem',
+              textAlign: 'center',
             }}
           >
             About Me
@@ -61,6 +90,7 @@ export default function About() {
               lineHeight: 1.2,
               color: 'var(--text-primary)',
               marginBottom: '1.5rem',
+              textAlign: 'center',
             }}
             className="md:text-4xl"
           >
@@ -93,11 +123,12 @@ export default function About() {
             style={{
               display: 'flex',
               gap: '2rem',
-              flexWrap: 'wrap',    // allow stats to wrap on very small screens
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
           >
             {stats.map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} style={{ textAlign: 'center' }}>
                 <div
                   style={{
                     fontFamily: 'Inter, sans-serif',
@@ -120,9 +151,34 @@ export default function About() {
               </div>
             ))}
           </div>
+
+          {/* Download CV button */}
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <a
+              href="/resume.pdf"
+              download
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                backgroundColor: 'var(--accent)',
+                color: '#fff',
+                padding: '0.5rem 1rem',
+                borderRadius: '0.375rem',
+                fontSize: '0.8rem',
+                fontWeight: 500,
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--accent-hover)')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--accent)')}
+            >
+              Download CV ↓
+            </a>
+          </div>
         </div>
 
-        {/* Right side - Code block */}
+        {/* Right side - Code block (unchanged) */}
         <div
           style={{
             display: 'flex',
@@ -135,7 +191,7 @@ export default function About() {
           <div
             style={{
               width: '100%',
-              maxWidth: '100%',     // allow full width on mobile
+              maxWidth: '100%',
               backgroundColor: 'var(--bg-secondary)',
               border: '1px solid var(--border-color)',
               borderRadius: '0.5rem',
@@ -143,7 +199,6 @@ export default function About() {
               boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)',
             }}
           >
-            {/* Window header */}
             <div
               style={{
                 backgroundColor: 'var(--border-color)',
@@ -160,15 +215,13 @@ export default function About() {
                 developer.js
               </span>
             </div>
-
-            {/* Code content with horizontal scroll inside the block only */}
             <div
               style={{
                 padding: '1rem',
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: '0.7rem',
                 lineHeight: 1.6,
-                overflowX: 'auto',   // scroll only inside code block if needed
+                overflowX: 'auto',
               }}
             >
               <pre style={{ margin: 0, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>
@@ -181,7 +234,7 @@ export default function About() {
                   <span style={{ marginLeft: '1rem', display: 'inline-block' }}>
                     <span style={{ color: '#e06c75' }}>name</span>
                     <span style={{ color: '#abb2bf' }}>:</span>{' '}
-                    <span style={{ color: '#98c379' }}>"Sadiq"</span>,
+                    <span style={{ color: '#98c379' }}>"Abubakar Ibrahim"</span>,
                   </span>
                   <br />
                   <span style={{ marginLeft: '1rem', display: 'inline-block' }}>

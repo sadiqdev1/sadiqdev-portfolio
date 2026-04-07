@@ -12,6 +12,7 @@ export default function Hero() {
     const typing = setInterval(() => {
       if (i <= fullText.length) {
         setDisplayText(fullText.slice(0, i));
+        setDisplayText(fullText.slice(0, i));
         i++;
       } else {
         clearInterval(typing);

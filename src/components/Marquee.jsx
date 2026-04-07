@@ -11,6 +11,7 @@ import {
   SiBootstrap,
 } from 'react-icons/si';
 import { DiCss3 } from 'react-icons/di';
+import { FiZap } from 'react-icons/fi';
 
 const items = [
   { name: 'HTML5', icon: SiHtml5, color: '#E34F26' },
@@ -22,7 +23,7 @@ const items = [
   { name: 'PHP', icon: SiPhp, color: '#777BB4' },
   { name: 'SQL', icon: SiMysql, color: '#4479A1' },
   { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3' },
-  { name: 'HTMX', icon: null, color: '#3E6D9C' }, // no official icon yet
+  { name: 'HTMX', icon: FiZap, color: '#3E6D9C' },  // using Zap icon instead of null
   { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
   { name: 'Livewire', icon: SiLivewire, color: '#FB70A9' },
 ];
@@ -30,45 +31,30 @@ const items = [
 export default function Marquee() {
   const doubled = [...items, ...items];
   return (
-    <div
-      style={{
-        padding: '1rem',
-        overflow: 'hidden',
-        backgroundColor: 'var(--bg-secondary)',
-        borderTop: '1px solid var(--border-color)',
-        borderBottom: '1px solid var(--border-color)',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          gap: '3rem',
-          whiteSpace: 'nowrap',
-        }}
-        className="animate-marquee"
-      >
+    <div className="py-4 overflow-hidden bg-[var(--bg-secondary)] border-y border-[var(--border-color)] group">
+      <div className="flex gap-8 md:gap-12 whitespace-nowrap animate-marquee group-hover:pause-animation">
         {doubled.map((item, i) => (
           <span
             key={i}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              color: 'var(--text-secondary)',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              flexShrink: 0,
-            }}
+            className="inline-flex items-center gap-2 text-[var(--text-secondary)] text-sm font-medium flex-shrink-0"
           >
-            {item.icon ? (
-              <item.icon style={{ fontSize: '1.25rem', color: item.color }} />
-            ) : (
-              <span style={{ fontSize: '1rem' }}>⚡</span>
-            )}
+            <item.icon className="text-xl" style={{ color: item.color }} />
             <span>{item.name}</span>
           </span>
         ))}
       </div>
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+        }
+        .group:hover .animate-marquee {
+          animation-play-state: paused;
+        }
+      `}</style>
     </div>
   );
 }
