@@ -1,11 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import LoadingScreen from '../../components/LoadingScreen';
+import ScrollProgress from '../../components/ScrollProgress';
+import BackToTop from '../../components/BackToTop';
 
 export default function LaravelTipsPost() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1500);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
+    <>
+      {isLoading && <LoadingScreen />}
+      <ScrollProgress />
+      <BackToTop />
+      
+      <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
       <article className="max-w-3xl mx-auto">
         
         <button
@@ -198,5 +212,6 @@ public function store(StorePostRequest $request) {
 
       </article>
     </div>
+    </>
   );
 }

@@ -2,10 +2,19 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi';
 import { FaReact } from 'react-icons/fa';
 import { SiLaravel, SiTailwindcss, SiMysql, SiStripe } from 'react-icons/si';
+import { useState, useEffect } from 'react';
+import LoadingScreen from '../components/LoadingScreen';
+import ScrollProgress from '../components/ScrollProgress';
+import BackToTop from '../components/BackToTop';
 import chortleImg from '../assets/Screenshot_20260403-114440.png';
 
 export default function ChortleCaseStudy() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1500);
+  }, []);
 
   const techStack = [
     { name: 'React', icon: FaReact, color: '#61DAFB', desc: 'Frontend framework for building the UI' },
@@ -45,7 +54,12 @@ export default function ChortleCaseStudy() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
+    <>
+      {isLoading && <LoadingScreen />}
+      <ScrollProgress />
+      <BackToTop />
+      
+      <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
       <div className="max-w-4xl mx-auto">
         
         {/* Back Button */}
@@ -219,5 +233,6 @@ export default function ChortleCaseStudy() {
 
       </div>
     </div>
+    </>
   );
 }
