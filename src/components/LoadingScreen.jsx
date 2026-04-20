@@ -50,8 +50,7 @@ export default function LoadingScreen() {
           className="h-full rounded-full transition-all duration-200"
           style={{
             width: `${Math.min(progress, 100)}%`,
-            background: 'linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))',
-            boxShadow: '0 0 12px var(--accent)',
+            background: 'var(--accent)',
           }}
         />
       </div>

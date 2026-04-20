@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { FaReact } from 'react-icons/fa';
+import { SiLaravel, SiTailwindcss, SiPhp, SiMysql, SiJavascript } from 'react-icons/si';
 import ThreeBackground from './ThreeBackground';
 
 export default function Hero() {
@@ -118,11 +120,30 @@ export default function Hero() {
             {showCursor && <span className="text-[var(--accent)] animate-pulse">_</span>}
           </code>
           <div className="flex gap-2 mt-6">
-            <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></span>
-            <span className="w-2.5 h-2.5 bg-yellow-500 rounded-full animate-pulse shadow-lg shadow-yellow-500/50" style={{ animationDelay: '0.2s' }}></span>
-            <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50" style={{ animationDelay: '0.4s' }}></span>
+            <span className="w-2.5 h-2.5 bg-[var(--accent)] rounded-full animate-pulse shadow-lg shadow-[var(--accent)]/50"></span>
+            <span className="w-2.5 h-2.5 bg-[var(--accent)] rounded-full animate-pulse shadow-lg shadow-[var(--accent)]/50" style={{ animationDelay: '0.2s' }}></span>
+            <span className="w-2.5 h-2.5 bg-[var(--accent)] rounded-full animate-pulse shadow-lg shadow-[var(--accent)]/50" style={{ animationDelay: '0.4s' }}></span>
           </div>
         </div>
+
+        {/* Tech stack indicators - Professional floating badges */}
+        {[
+          { label: 'React', icon: FaReact, pos: 'top-4 -left-4', delay: '0s' },
+          { label: 'Laravel', icon: SiLaravel, pos: 'bottom-8 -right-4', delay: '0.1s' },
+          { label: 'Tailwind', icon: SiTailwindcss, pos: 'top-1/2 -left-8', delay: '0.2s' },
+          { label: 'PHP', icon: SiPhp, pos: 'top-20 -right-6', delay: '0.3s' },
+          { label: 'MySQL', icon: SiMysql, pos: 'bottom-20 -left-6', delay: '0.4s' },
+          { label: 'JavaScript', icon: SiJavascript, pos: 'bottom-4 right-4', delay: '0.5s' },
+        ].map((tech) => (
+          <div
+            key={tech.label}
+            className={`absolute ${tech.pos} glass border border-[var(--border-color)] rounded-xl px-3 py-2 text-xs font-mono font-semibold text-[var(--text-primary)] shadow-lg flex items-center gap-2 hover:scale-110 hover:border-[var(--accent)] hover:shadow-xl transition-all duration-300 animate-fadeUp cursor-default`}
+            style={{ animationDelay: tech.delay }}
+          >
+            <tech.icon className="w-3.5 h-3.5 text-[var(--accent)]" />
+            {tech.label}
+          </div>
+        ))}
       </div>
     </section>
   );
