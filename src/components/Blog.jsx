@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 
 const articles = [
   {
+    title: 'Who is SadiqDev1?',
+    excerpt: 'Meet Abubakar Ibrahim — the full-stack developer behind the SadiqDev1 alias. Learn about his journey, skills, and work.',
+    date: 'April 2024',
+    readTime: '7 min read',
+    tags: ['About', 'SadiqDev1', 'Developer'],
+    link: '/blog/who-is-sadiqdev1',
+  },
+  {
     title: 'How I Built Chortle with React + Laravel',
     excerpt: 'A deep dive into building a full-stack meme sharing platform with modern web technologies.',
     date: 'March 2024',
@@ -52,7 +60,7 @@ export default function Blog() {
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {articles.map((article, idx) => (
             <article
               key={idx}

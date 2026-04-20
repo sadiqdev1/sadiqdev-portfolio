@@ -9,6 +9,7 @@ import ChortleCaseStudy from './pages/ChortleCaseStudy.jsx'
 import ChortleBuildPost from './pages/blog/ChortleBuildPost.jsx'
 import LaravelTipsPost from './pages/blog/LaravelTipsPost.jsx'
 import JourneyPost from './pages/blog/JourneyPost.jsx'
+import WhoIsSadiqDevPost from './pages/blog/WhoIsSadiqDevPost.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/blog/how-i-built-chortle" element={<ChortleBuildPost />} />
           <Route path="/blog/laravel-tips" element={<LaravelTipsPost />} />
           <Route path="/blog/my-journey" element={<JourneyPost />} />
+          <Route path="/blog/who-is-sadiqdev1" element={<WhoIsSadiqDevPost />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
