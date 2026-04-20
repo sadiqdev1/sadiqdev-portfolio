@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
 
-  const links = ["Home", "About", "Skills", "Projects", "Services", "Contact"];
+  const links = ["Home", "About", "Skills", "Projects", "Contact"];
+  const isHomePage = location.pathname === '/';
 
   // Theme initialization - Default to dark
   useEffect(() => {
@@ -29,7 +33,9 @@ export default function Navbar() {
 
   // Scroll shadow & active link detection
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'skills', 'projects', 'services', 'contact'];
+    if (!isHomePage) return;
+    
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'contact'];
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       for (const id of sectionIds) {
@@ -45,7 +51,7 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   const toggleTheme = () => {
     const newDark = !isDark;
@@ -64,9 +70,28 @@ export default function Navbar() {
   const handleLinkClick = (e, linkId) => {
     e.preventDefault();
     setOpen(false);
-    const element = document.getElementById(linkId);
+    
+    if (linkId === 'home' && !isHomePage) {
+      navigate('/');
+      return;
+    }
+    
+    if (!isHomePage) {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(linkId === 'home' ? 'hero' : linkId);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
+        }
+      }, 100);
+      return;
+    }
+    
+    const element = document.getElementById(linkId === 'home' ? 'hero' : linkId);
     if (element) {
-      const offset = 80; // navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
     }
@@ -135,16 +160,15 @@ export default function Navbar() {
             Resume
           </a>
 
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "contact")}
+          <button
+            onClick={() => navigate('/hire-me')}
             className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-[var(--accent)]/50 hover:scale-105 transition-all duration-300"
           >
-            Contact
+            Hire Me
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </a>
+          </button>
 
           {/* Mobile menu button */}
           <button
@@ -183,13 +207,12 @@ export default function Navbar() {
             );
           })}
           <div className="flex gap-3 pt-2">
-            <a
-              href="#contact"
-              onClick={(e) => handleLinkClick(e, "contact")}
+            <button
+              onClick={() => navigate('/hire-me')}
               className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-6 py-2.5 rounded-xl text-sm font-semibold"
             >
-              Contact
-            </a>
+              Hire Me
+            </button>
             <a
               href="/resume.pdf"
               download
