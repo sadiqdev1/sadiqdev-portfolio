@@ -2,27 +2,27 @@ import { FiBriefcase, FiCalendar, FiMapPin } from 'react-icons/fi';
 
 const experiences = [
   {
-    title: 'Full-Stack Developer',
-    company: 'Freelance',
+    title: 'Freelance Full-Stack Developer',
+    company: 'Self-Employed',
     location: 'Remote',
-    period: '2020 – Present',
-    description: 'Building custom web applications for clients worldwide using React, Laravel, and modern web technologies. Specialized in creating scalable, performant solutions.',
+    period: 'Jan 2023 – Present',
+    description: 'Building custom web applications for international clients using React, Laravel, and modern web technologies. Delivering scalable, high-performance solutions tailored to client needs.',
     achievements: [
-      'Delivered 15+ successful projects',
-      'Maintained 98% client satisfaction rate',
-      'Reduced load times by 60% on average',
+      'Completed 10+ projects for clients worldwide',
+      'Specialized in React + Laravel full-stack development',
+      'Maintained 5-star ratings from satisfied clients',
     ],
   },
   {
-    title: 'Web Developer',
-    company: 'Various Projects',
-    location: 'Nigeria',
-    period: '2018 – 2020',
-    description: 'Developed responsive websites and web applications. Focused on creating user-friendly interfaces and optimizing performance.',
+    title: 'Junior Web Developer',
+    company: 'Piona Tech Solution',
+    location: 'Lagos, Nigeria',
+    period: 'Jan 2021 – Dec 2022',
+    description: 'Built responsive websites using HTML, CSS, and JavaScript. Focused on creating user-friendly interfaces and learning modern frameworks.',
     achievements: [
-      'Built 10+ responsive websites',
-      'Implemented modern UI/UX practices',
-      'Collaborated with design teams',
+      'Created 5 client websites from scratch',
+      'Learned React and Laravel frameworks',
+      'Improved page speed by 40% through optimization',
     ],
   },
 ];
@@ -43,7 +43,7 @@ export default function Experience() {
             Experience
           </p>
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-[var(--text-primary)] tracking-tight mb-4">
-            Professional Journey
+            My Journey
           </h2>
           <p className="text-[var(--text-secondary)] text-base max-w-xl mx-auto">
             The experiences and milestones that shaped my expertise
