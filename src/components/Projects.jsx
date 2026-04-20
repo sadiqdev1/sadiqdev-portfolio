@@ -14,8 +14,8 @@ const projects = [
       { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
     ],
     desc: 'A full‑stack meme sharing platform where users can upload, vote, and comment on memes. Integrated with payment gateway for premium features.',
-    liveLink: 'https://chortle-seven.vercel.app/',
-    repoLink: 'https://chortle-seven.vercel.app/',
+    liveLink: 'https://chortle-production.up.railway.app/',
+    repoLink: 'https://chortle-production.up.railway.app/',
     stars: 24,
   },
 ];
