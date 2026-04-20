@@ -72,8 +72,8 @@ export default function ThreeBackground() {
       velocities.push({
         angle: angle,
         radius: radius,
-        speed: Math.random() * 0.02 + 0.01,
-        verticalSpeed: (Math.random() - 0.5) * 0.3,
+        speed: Math.random() * 0.04 + 0.02, // Faster spiral
+        verticalSpeed: (Math.random() - 0.5) * 0.5, // Faster vertical movement
       });
 
       // Random phase for wave motion
@@ -94,10 +94,10 @@ export default function ThreeBackground() {
     particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 2.5,
+      size: 3, // Bigger particles
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9, // More visible
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
       depthWrite: false,
@@ -265,13 +265,13 @@ export default function ThreeBackground() {
         velocity.radius += Math.sin(elapsedTime * 0.5 + phases[i]) * 0.2;
 
         // Update position with spiral + wave
-        positions[i3] = Math.cos(velocity.angle) * velocity.radius + Math.sin(elapsedTime + phases[i]) * 10;
+        positions[i3] = Math.cos(velocity.angle) * velocity.radius + Math.sin(elapsedTime + phases[i]) * 15;
         positions[i3 + 1] += velocity.verticalSpeed;
-        positions[i3 + 2] = Math.sin(velocity.angle) * velocity.radius + Math.cos(elapsedTime + phases[i]) * 10;
+        positions[i3 + 2] = Math.sin(velocity.angle) * velocity.radius + Math.cos(elapsedTime + phases[i]) * 15;
 
-        // Add turbulence
-        positions[i3] += Math.sin(elapsedTime * 2 + i * 0.1) * 0.5;
-        positions[i3 + 2] += Math.cos(elapsedTime * 2 + i * 0.1) * 0.5;
+        // Add turbulence - MORE DRAMATIC
+        positions[i3] += Math.sin(elapsedTime * 3 + i * 0.1) * 1.5;
+        positions[i3 + 2] += Math.cos(elapsedTime * 3 + i * 0.1) * 1.5;
 
         // Wrap around vertically
         if (positions[i3 + 1] > 100) positions[i3 + 1] = -100;
@@ -281,11 +281,12 @@ export default function ThreeBackground() {
         if (velocity.radius > 200) velocity.radius = 50;
         if (velocity.radius < 30) velocity.radius = 150;
 
-        // Color pulsing
+        // Color pulsing - keep original colors
+        const originalColor = colors[i % colors.length];
         const colorPulse = Math.sin(elapsedTime * 2 + i * 0.1) * 0.3 + 0.7;
-        particleColorsArray[i3] *= colorPulse;
-        particleColorsArray[i3 + 1] *= colorPulse;
-        particleColorsArray[i3 + 2] *= colorPulse;
+        particleColorsArray[i3] = originalColor.r * colorPulse;
+        particleColorsArray[i3 + 1] = originalColor.g * colorPulse;
+        particleColorsArray[i3 + 2] = originalColor.b * colorPulse;
 
         // Connect nearby particles
         let connections = 0;
