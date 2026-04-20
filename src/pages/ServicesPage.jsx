@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiArrowRight, FiCheck } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
+import LoadingScreen from '../components/LoadingScreen';
+import ScrollProgress from '../components/ScrollProgress';
+import BackToTop from '../components/BackToTop';
 
 const projectTypes = [
   { id: 'landing', name: 'Landing Page', icon: '🎯', basePrice: 50000 },
@@ -59,6 +62,7 @@ const timelines = [
 
 export default function ServicesPage() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     projectType: '',
@@ -71,6 +75,13 @@ export default function ServicesPage() {
   });
 
   const [estimatedPrice, setEstimatedPrice] = useState(0);
+
+  useEffect(() => {
+    // Hide loading screen after initial load
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
 
   const handleProjectTypeSelect = (typeId) => {
     setFormData({ ...formData, projectType: typeId, selectedFeatures: [] });
@@ -172,8 +183,13 @@ ${formData.customDetails || 'None provided'}
   const currentFeatures = features[formData.projectType] || [];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
-      <div className="max-w-4xl mx-auto">
+    <>
+      {isLoading && <LoadingScreen />}
+      <ScrollProgress />
+      <BackToTop />
+      
+      <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] py-12 px-6">
+        <div className="max-w-4xl mx-auto">
         
         {/* Header */}
         <div className="mb-12">
@@ -449,5 +465,6 @@ ${formData.customDetails || 'None provided'}
 
       </div>
     </div>
+    </>
   );
 }
