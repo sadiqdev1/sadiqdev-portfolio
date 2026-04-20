@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
+import SEO from '../../components/SEO';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -13,8 +14,49 @@ export default function LaravelTipsPost() {
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "5 Laravel Tips I Wish I Knew Earlier",
+    "description": "Practical Laravel tips that will save you hours of debugging and improve your code quality. Learn about query scopes, API resources, eager loading, form requests, and database transactions.",
+    "image": "https://sadiqdev-portfolio.vercel.app/og-image.png",
+    "author": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "url": "https://sadiqdev-portfolio.vercel.app/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sadiqdev-portfolio.vercel.app/profile1.jpg"
+      }
+    },
+    "datePublished": "2024-02-10",
+    "dateModified": "2024-02-10",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sadiqdev-portfolio.vercel.app/blog/laravel-tips"
+    },
+    "keywords": ["Laravel", "PHP", "Web Development", "Laravel Tips", "Backend Development"],
+    "articleSection": "Technology",
+    "wordCount": 900
+  };
+
   return (
     <>
+      <SEO 
+        title="5 Laravel Tips I Wish I Knew Earlier | Abubakar Ibrahim"
+        description="Practical Laravel tips that will save you hours of debugging and improve your code quality. Learn about query scopes, API resources, eager loading, form requests, and more."
+        keywords="laravel tips, laravel best practices, php development, laravel tutorial, query scopes, eager loading, n+1 problem, laravel api resources"
+        canonicalUrl="/blog/laravel-tips"
+        ogType="article"
+        article={true}
+        publishedTime="2024-02-10T00:00:00Z"
+        modifiedTime="2024-02-10T00:00:00Z"
+        structuredData={structuredData}
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />

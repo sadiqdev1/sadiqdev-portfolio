@@ -3,6 +3,7 @@ import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi';
 import { FaReact } from 'react-icons/fa';
 import { SiLaravel, SiTailwindcss, SiMysql, SiStripe } from 'react-icons/si';
 import { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import LoadingScreen from '../components/LoadingScreen';
 import ScrollProgress from '../components/ScrollProgress';
 import BackToTop from '../components/BackToTop';
@@ -15,6 +16,25 @@ export default function ChortleCaseStudy() {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Chortle - Full-Stack Meme Sharing Platform",
+    "description": "A full-stack meme sharing platform built with React, Laravel, Tailwind CSS, MySQL, and Stripe. Features include voting system, comments, premium memberships, and real-time updates.",
+    "image": "https://sadiqdev-portfolio.vercel.app/og-image.png",
+    "author": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "url": "https://sadiqdev-portfolio.vercel.app/"
+    },
+    "dateCreated": "2024-03-01",
+    "url": "https://chortle-production.up.railway.app/",
+    "keywords": ["React", "Laravel", "Full-Stack", "Meme Platform", "Web Application"],
+    "programmingLanguage": ["JavaScript", "PHP"],
+    "runtimePlatform": ["React", "Laravel"],
+    "applicationCategory": "WebApplication"
+  };
 
   const techStack = [
     { name: 'React', icon: FaReact, color: '#61DAFB', desc: 'Frontend framework for building the UI' },
@@ -55,6 +75,14 @@ export default function ChortleCaseStudy() {
 
   return (
     <>
+      <SEO 
+        title="Chortle Case Study - Full-Stack Meme Platform | Abubakar Ibrahim"
+        description="Detailed case study of Chortle, a full-stack meme sharing platform built with React and Laravel. Features voting, comments, premium memberships with Stripe, and 500+ active users."
+        keywords="chortle case study, react laravel project, full-stack portfolio, meme platform, web app case study, stripe integration, react project"
+        canonicalUrl="/projects/chortle"
+        ogType="article"
+        structuredData={structuredData}
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />

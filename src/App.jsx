@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from "./components/Marquee";
@@ -17,6 +18,38 @@ import BackToTop from "./components/BackToTop";
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showBanner, setShowBanner] = useState(true);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abubakar Ibrahim",
+    "url": "https://sadiqdev-portfolio.vercel.app/",
+    "image": "https://sadiqdev-portfolio.vercel.app/profile1.jpg",
+    "sameAs": [
+      "https://github.com/sadiqdev1",
+      "https://www.linkedin.com/in/sadiqdev1/",
+      "https://x.com/sadiqdev1",
+      "https://instagram.com/sadiqdev1",
+      "https://facebook.com/sadiqdev1"
+    ],
+    "jobTitle": "Full-Stack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    },
+    "knowsAbout": ["Laravel", "React", "Tailwind CSS", "PHP", "JavaScript", "MySQL", "Full-Stack Development"],
+    "description": "Full-stack developer specializing in Laravel, React, and modern web applications. Building scalable solutions for clients worldwide.",
+    "alumniOf": "Piona Tech Solution",
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Full-Stack Web Developer",
+      "occupationLocation": {
+        "@type": "Country",
+        "name": "Nigeria"
+      },
+      "skills": "Laravel, React, PHP, JavaScript, MySQL, Tailwind CSS, Stripe Integration"
+    }
+  };
 
   useEffect(() => {
     // Hide loading screen after initial load
@@ -104,6 +137,10 @@ export default function App() {
 
   return (
     <>
+      <SEO 
+        structuredData={structuredData}
+        canonicalUrl="/"
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />

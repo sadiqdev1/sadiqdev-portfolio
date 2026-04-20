@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiArrowRight, FiCheck } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
+import SEO from '../components/SEO';
 import LoadingScreen from '../components/LoadingScreen';
 import ScrollProgress from '../components/ScrollProgress';
 import BackToTop from '../components/BackToTop';
@@ -182,8 +183,65 @@ ${formData.customDetails || 'None provided'}
   const currentProject = projectTypes.find((p) => p.id === formData.projectType);
   const currentFeatures = features[formData.projectType] || [];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Web Development Services",
+    "provider": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "url": "https://sadiqdev-portfolio.vercel.app/"
+    },
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Landing Page Development",
+            "description": "Professional landing page with responsive design"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Portfolio Website",
+            "description": "Custom portfolio website with blog and admin dashboard"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Full-Stack Web Application",
+            "description": "Complete web application with React and Laravel"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "E-commerce Store",
+            "description": "Full-featured e-commerce platform with payment integration"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
+      <SEO 
+        title="Hire Me - Web Development Services | Abubakar Ibrahim"
+        description="Professional web development services. Specializing in Laravel, React, and full-stack solutions. Get a custom quote for your landing page, portfolio, web app, or e-commerce store."
+        keywords="hire web developer, freelance developer, laravel developer for hire, react developer, web development services, custom web development, e-commerce development"
+        canonicalUrl="/hire-me"
+        structuredData={structuredData}
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />

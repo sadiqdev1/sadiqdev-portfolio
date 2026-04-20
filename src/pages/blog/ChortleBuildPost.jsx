@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
+import SEO from '../../components/SEO';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -13,8 +14,49 @@ export default function ChortleBuildPost() {
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How I Built Chortle with React + Laravel",
+    "description": "A deep dive into building a full-stack meme sharing platform with modern web technologies including React, Laravel, Tailwind CSS, and Stripe.",
+    "image": "https://sadiqdev-portfolio.vercel.app/og-image.png",
+    "author": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "url": "https://sadiqdev-portfolio.vercel.app/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sadiqdev-portfolio.vercel.app/profile1.jpg"
+      }
+    },
+    "datePublished": "2024-03-15",
+    "dateModified": "2024-03-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sadiqdev-portfolio.vercel.app/blog/how-i-built-chortle"
+    },
+    "keywords": ["React", "Laravel", "Full-Stack Development", "Web Development", "Chortle", "Meme Platform"],
+    "articleSection": "Technology",
+    "wordCount": 1200
+  };
+
   return (
     <>
+      <SEO 
+        title="How I Built Chortle with React + Laravel | Abubakar Ibrahim"
+        description="A deep dive into building a full-stack meme sharing platform with modern web technologies. Learn how I used React, Laravel, Tailwind CSS, MySQL, and Stripe to create Chortle."
+        keywords="react laravel tutorial, full-stack development, chortle case study, meme platform, react laravel integration, stripe integration, web development blog"
+        canonicalUrl="/blog/how-i-built-chortle"
+        ogType="article"
+        article={true}
+        publishedTime="2024-03-15T00:00:00Z"
+        modifiedTime="2024-03-15T00:00:00Z"
+        structuredData={structuredData}
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />

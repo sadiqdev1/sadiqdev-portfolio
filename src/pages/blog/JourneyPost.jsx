@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
+import SEO from '../../components/SEO';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -13,8 +14,49 @@ export default function JourneyPost() {
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "My Journey from Junior to Freelance Developer",
+    "description": "Lessons learned, challenges faced, and how I transitioned from a junior developer role at Piona Tech Solution to freelancing full-time.",
+    "image": "https://sadiqdev-portfolio.vercel.app/og-image.png",
+    "author": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "url": "https://sadiqdev-portfolio.vercel.app/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Abubakar Ibrahim",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sadiqdev-portfolio.vercel.app/profile1.jpg"
+      }
+    },
+    "datePublished": "2024-01-20",
+    "dateModified": "2024-01-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sadiqdev-portfolio.vercel.app/blog/my-journey"
+    },
+    "keywords": ["Career", "Freelance", "Web Development", "Developer Journey", "Career Transition"],
+    "articleSection": "Career",
+    "wordCount": 1100
+  };
+
   return (
     <>
+      <SEO 
+        title="My Journey from Junior to Freelance Developer | Abubakar Ibrahim"
+        description="Lessons learned, challenges faced, and how I transitioned from a junior developer role to freelancing full-time. Real advice for aspiring freelance developers."
+        keywords="freelance developer journey, junior to senior developer, career transition, freelance web developer, developer career advice, piona tech solution"
+        canonicalUrl="/blog/my-journey"
+        ogType="article"
+        article={true}
+        publishedTime="2024-01-20T00:00:00Z"
+        modifiedTime="2024-01-20T00:00:00Z"
+        structuredData={structuredData}
+      />
       {isLoading && <LoadingScreen />}
       <ScrollProgress />
       <BackToTop />
