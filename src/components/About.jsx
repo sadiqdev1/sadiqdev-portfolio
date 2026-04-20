@@ -1,5 +1,5 @@
 import { FiCode, FiZap, FiMonitor, FiGlobe } from 'react-icons/fi';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.webp';
 
 const stats = [
   { value: '15+',   label: 'Projects Completed' },

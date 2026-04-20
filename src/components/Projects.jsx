@@ -1,4 +1,4 @@
-import chortleImg from '../assets/Screenshot_20260403-114440.png';
+import chortleImg from '../assets/chortle-preview.webp';
 import { FiExternalLink, FiGithub, FiStar, FiClock } from 'react-icons/fi';
 import { FaReact, FaHtml5, FaJs } from 'react-icons/fa';
 import { SiLaravel, SiTailwindcss, SiStripe } from 'react-icons/si';

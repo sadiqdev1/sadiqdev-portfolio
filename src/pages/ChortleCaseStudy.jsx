@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
 import LoadingScreen from '../components/LoadingScreen';
 import ScrollProgress from '../components/ScrollProgress';
 import BackToTop from '../components/BackToTop';
-import chortleImg from '../assets/Screenshot_20260403-114440.png';
+import chortleImg from '../assets/chortle-preview.webp';
 
 export default function ChortleCaseStudy() {
   const navigate = useNavigate();

@@ -187,7 +187,7 @@ export default function WhoIsSadiqDevPost() {
             {/* Profile card */}
             <div className="pro-card flex items-center gap-6 mb-8">
               <img
-                src="/profile1.jpg"
+                src="/profile1.webp"
                 alt="Abubakar Ibrahim – SadiqDev1, Full-Stack Developer"
                 width="80"
                 height="80"

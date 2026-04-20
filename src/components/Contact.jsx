@@ -169,22 +169,74 @@ export default function Contact() {
             </a>
           </div>
 
-          {/* Status messages */}
-          {status === 'success' && (
-            <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl px-5 py-4 text-sm font-semibold mb-6">
-              <span className="text-lg">✓</span>
-              Message sent successfully! I'll get back to you soon.
-            </div>
-          )}
-          {status === 'error' && (
-            <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl px-5 py-4 text-sm font-semibold mb-6">
-              <span className="text-lg">✕</span>
-              Something went wrong. Please try again or email me directly.
-            </div>
-          )}
+          {/* SUCCESS STATE - Full animated replacement */}
+          {status === 'success' ? (
+            <div className="pro-card text-center py-16 px-8" style={{ minHeight: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              {/* Animated checkmark */}
+              <div className="relative mb-8">
+                <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto"
+                  style={{ background: 'linear-gradient(135deg, #10b981, #059669)', boxShadow: '0 0 60px rgba(16,185,129,0.4)' }}>
+                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    style={{ animation: 'scaleIn 0.4s ease' }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                {/* Ripple rings */}
+                <div className="absolute inset-0 rounded-full border-2 border-emerald-500/40 animate-ping" style={{ animationDuration: '1.5s' }} />
+                <div className="absolute inset-0 rounded-full border border-emerald-500/20 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.3s' }} />
+              </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="pro-card flex flex-col gap-5" style={{ padding: '2rem' }}>
+              <h3 className="font-display font-extrabold text-3xl text-[var(--text-primary)] mb-3">
+                Message Sent! 🎉
+              </h3>
+              <p className="text-[var(--text-secondary)] text-base mb-2 max-w-sm">
+                Thanks for reaching out. I'll get back to you within <strong className="text-[var(--accent)]">24 hours</strong>.
+              </p>
+              <p className="text-sm text-[var(--text-tertiary)] mb-8">
+                Check your inbox for a confirmation.
+              </p>
+
+              {/* What happens next */}
+              <div className="w-full max-w-sm text-left space-y-3 mb-8">
+                {[
+                  { step: '1', text: 'I review your message', done: true },
+                  { step: '2', text: 'I reply within 24 hours', done: false },
+                  { step: '3', text: 'We schedule a call if needed', done: false },
+                ].map((item) => (
+                  <div key={item.step} className="flex items-center gap-3 text-sm">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                      item.done
+                        ? 'bg-emerald-500 text-white'
+                        : 'bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-tertiary)]'
+                    }`}>
+                      {item.done ? '✓' : item.step}
+                    </div>
+                    <span className={item.done ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)]'}>
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => setStatus('idle')}
+                className="inline-flex items-center gap-2 glass border border-[var(--border-color)] text-[var(--text-secondary)] px-6 py-2.5 rounded-xl text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-300"
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* Error banner */}
+              {status === 'error' && (
+                <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl px-5 py-4 text-sm font-semibold mb-6">
+                  <span className="text-lg">✕</span>
+                  Something went wrong. Please try again or email me directly.
+                </div>
+              )}
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="pro-card flex flex-col gap-5" style={{ padding: '2rem' }}>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Name */}
@@ -274,6 +326,8 @@ export default function Contact() {
               )}
             </button>
           </form>
+            </>
+          )}
 
           {/* Social links */}
           <div className="flex justify-center gap-3 mt-10 flex-wrap">
