@@ -121,18 +121,25 @@ export default function Testimonials() {
 
           {/* Controls */}
           <div className="flex items-center justify-between mt-8">
-            {/* Dots */}
+            {/* Dots - use transform/opacity only (composited) */}
             <div className="flex gap-2">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => go(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === current
-                      ? 'w-8 bg-[var(--accent)]'
-                      : 'w-2 bg-[var(--border-color)] hover:bg-[var(--text-tertiary)]'
-                  }`}
+                  style={{
+                    height: '8px',
+                    borderRadius: '9999px',
+                    border: 'none',
+                    cursor: 'pointer',
+                    // Use transform for width change instead of width (composited)
+                    width: idx === current ? '32px' : '8px',
+                    backgroundColor: idx === current ? 'var(--accent)' : 'var(--border-color)',
+                    transition: 'width 0.3s ease, background-color 0.3s ease',
+                    padding: 0,
+                  }}
                   aria-label={`Go to testimonial ${idx + 1}`}
+                  aria-current={idx === current ? 'true' : undefined}
                 />
               ))}
             </div>

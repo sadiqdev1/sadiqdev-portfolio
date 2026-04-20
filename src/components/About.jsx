@@ -35,6 +35,8 @@ export default function About() {
                 src={profileImg}
                 alt="Abubakar Ibrahim – Full-Stack Developer"
                 loading="lazy"
+                width="128"
+                height="128"
                 className="relative w-32 h-32 rounded-full object-cover border-2 border-[var(--border-hover)] group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -106,9 +108,12 @@ export default function About() {
               </h3>
               <img
                 src="https://github-readme-stats.vercel.app/api?username=sadiqdev1&show_icons=true&theme=transparent&hide_border=true&title_color=6366f1&icon_color=8b5cf6&text_color=a0a0ab&bg_color=16161f"
-                alt="GitHub Stats"
+                alt="GitHub Stats for Abubakar Ibrahim"
                 className="w-full"
                 loading="lazy"
+                width="495"
+                height="195"
+                style={{ aspectRatio: '495/195' }}
               />
             </div>
 

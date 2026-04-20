@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Marquee from "./components/Marquee";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Blog from "./components/Blog";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
+
+// Lazy load below-the-fold components
+const Marquee = lazy(() => import("./components/Marquee"));
+const About = lazy(() => import("./components/About"));
+const Skills = lazy(() => import("./components/Skills"));
+const Experience = lazy(() => import("./components/Experience"));
+const Projects = lazy(() => import("./components/Projects"));
+const Blog = lazy(() => import("./components/Blog"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -169,6 +171,7 @@ export default function App() {
       )}
       
       <main 
+        id="main-content"
         style={{ 
           backgroundColor: 'var(--bg-primary)', 
           color: 'var(--text-primary)', 
@@ -179,15 +182,17 @@ export default function App() {
       >
         <Navbar />
         <Hero />
-        <Marquee />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Blog />
-        <Testimonials />
-        <Contact />
-        <Footer />
+        <Suspense fallback={null}>
+          <Marquee />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Blog />
+          <Testimonials />
+          <Contact />
+          <Footer />
+        </Suspense>
       </main>
     </>
   );

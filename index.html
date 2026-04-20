@@ -6,23 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="s-7KkFK2l_A4E6SHw2dy2aufjHWMX6OrQtAviAHpbZk" />
     
-    <!-- Preconnect for performance -->
+    <!-- Preconnect for performance (before fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- Non-render-blocking font load with display=swap -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <!-- Fallback for no-JS -->
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    </noscript>
+
+    <!-- Default meta tags (overridden by React Helmet per page) -->
+    <title>Abubakar Ibrahim | Full-Stack Developer – Laravel, React, Tailwind</title>
+    <meta name="description" content="Full-stack developer specializing in Laravel, React, and modern web applications. I build scalable, high-performance websites and e-commerce solutions." />
+
+    <!-- Google Analytics - deferred -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-XXXXXXXXXX');
     </script>
-
-    <!-- Default meta tags (will be overridden by React Helmet) -->
-    <title>Abubakar Ibrahim | Full-Stack Developer – Laravel, React, Tailwind</title>
-    <meta name="description" content="Full-stack developer specializing in Laravel, React, and modern web applications. I build scalable, high-performance websites and e-commerce solutions." />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   </head>
   <body>
     <div id="root"></div>

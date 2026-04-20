@@ -187,8 +187,9 @@ export default function Navbar() {
         className={`md:hidden absolute left-0 top-full w-full glass border-t border-[var(--border-color)] overflow-hidden transition-all duration-300 ${
           open ? "max-h-96 opacity-100 py-6" : "max-h-0 opacity-0 py-0"
         }`}
+        aria-hidden={!open}
       >
-        <ul className="flex flex-col items-center gap-5 list-none">
+        <ul className="flex flex-col items-center gap-5 list-none p-0 m-0">
           {links.map((link) => {
             const linkId = link.toLowerCase();
             const isActive = activeLink === linkId;
@@ -206,7 +207,7 @@ export default function Navbar() {
               </li>
             );
           })}
-          <div className="flex gap-3 pt-2">
+          <li className="flex gap-3 pt-2">
             <button
               onClick={() => navigate('/hire-me')}
               className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-6 py-2.5 rounded-xl text-sm font-semibold"
@@ -220,7 +221,7 @@ export default function Navbar() {
             >
               Resume
             </a>
-          </div>
+          </li>
         </ul>
       </div>
     </nav>

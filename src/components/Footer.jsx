@@ -38,11 +38,11 @@ export default function Footer() {
           </div>
 
           {/* Quick links */}
-          <div>
-            <h4 className="font-display font-bold text-sm tracking-widest uppercase text-[var(--text-tertiary)] mb-4">
+          <nav aria-label="Footer navigation">
+            <h4 className="font-display font-bold text-sm tracking-widest uppercase text-[var(--text-secondary)] mb-4">
               Quick Links
             </h4>
-            <ul className="flex flex-col gap-2.5">
+            <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
               {links.map((link) => (
                 <li key={link}>
                   <button
@@ -54,43 +54,44 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Connect */}
           <div>
-            <h4 className="font-display font-bold text-sm tracking-widest uppercase text-[var(--text-tertiary)] mb-4">
+            <h4 className="font-display font-bold text-sm tracking-widest uppercase text-[var(--text-secondary)] mb-4">
               Connect
             </h4>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3 flex-wrap" role="list" aria-label="Social media links">
               {socials.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  title={s.label}
+                  aria-label={s.label}
+                  role="listitem"
                   className="w-10 h-10 rounded-xl glass border border-[var(--border-color)] text-[var(--text-secondary)] flex items-center justify-center hover:border-[var(--accent)] hover:text-[var(--accent)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <s.icon />
+                  <s.icon aria-hidden="true" />
                 </a>
               ))}
             </div>
-            <p className="text-xs text-[var(--text-tertiary)] mt-4">
+            <p className="text-xs text-[var(--text-secondary)] mt-4">
               Available for freelance work
             </p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-xs text-emerald-500 font-semibold">Open to opportunities</span>
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" aria-hidden="true" />
+              <span className="text-xs text-emerald-400 font-semibold">Open to opportunities</span>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="border-t border-[var(--border-color)] pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs text-[var(--text-secondary)]">
             © {year} SadiqDev. All rights reserved.
           </p>
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs text-[var(--text-secondary)]">
             Built with React & Tailwind CSS
           </p>
         </div>
