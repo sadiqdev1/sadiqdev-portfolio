@@ -235,11 +235,11 @@ export default function ThreeBackground() {
     // ============================================
     // ANIMATION LOOP - THE MAGIC HAPPENS HERE
     // ============================================
-    const clock = new THREE.Clock();
+    let startTime = Date.now();
     
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (Date.now() - startTime) / 1000; // Convert to seconds
 
       // Smooth camera movement
       targetCameraX += (mouseX * 30 - targetCameraX) * 0.05;
