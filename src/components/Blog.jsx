@@ -1,4 +1,5 @@
 import { FiClock, FiArrowRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const articles = [
   {
@@ -7,7 +8,7 @@ const articles = [
     date: 'March 2024',
     readTime: '8 min read',
     tags: ['React', 'Laravel', 'Full-Stack'],
-    link: '#',
+    link: '/blog/how-i-built-chortle',
   },
   {
     title: '5 Laravel Tips I Wish I Knew Earlier',
@@ -15,7 +16,7 @@ const articles = [
     date: 'February 2024',
     readTime: '5 min read',
     tags: ['Laravel', 'PHP', 'Tips'],
-    link: '#',
+    link: '/blog/laravel-tips',
   },
   {
     title: 'My Journey from Junior to Freelance Developer',
@@ -23,7 +24,7 @@ const articles = [
     date: 'January 2024',
     readTime: '6 min read',
     tags: ['Career', 'Freelance', 'Journey'],
-    link: '#',
+    link: '/blog/my-journey',
   },
 ];
 
@@ -90,29 +91,18 @@ export default function Blog() {
               </div>
 
               {/* Read More */}
-              <a
-                href={article.link}
+              <Link
+                to={article.link}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] hover:gap-3 transition-all duration-300"
               >
                 Read Article
                 <FiArrowRight />
-              </a>
+              </Link>
 
               {/* Hover gradient */}
               <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-700" />
             </article>
           ))}
-        </div>
-
-        {/* Coming Soon Note */}
-        <div className="reveal text-center mt-12">
-          <p className="text-sm text-[var(--text-tertiary)] italic">
-            Articles coming soon! Follow me on{' '}
-            <a href="https://twitter.com/sadiqdev1" target="_blank" rel="noreferrer" className="text-[var(--accent)] hover:underline">
-              Twitter
-            </a>{' '}
-            for updates.
-          </p>
         </div>
       </div>
     </section>
