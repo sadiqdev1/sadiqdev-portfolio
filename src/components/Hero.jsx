@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FaReact } from 'react-icons/fa';
-import { SiLaravel, SiTailwindcss, SiPhp, SiMysql, SiJquery } from 'react-icons/si';
 import ThreeBackground from './ThreeBackground';
 
 export default function Hero() {
@@ -125,25 +123,6 @@ export default function Hero() {
             <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50" style={{ animationDelay: '0.4s' }}></span>
           </div>
         </div>
-
-        {/* Tech chips – expanded list with animations */}
-        {[
-          { label: 'React.js', icon: FaReact, color: '#61DAFB', pos: 'top-6 -left-6', delay: '0s' },
-          { label: 'Laravel', icon: SiLaravel, color: '#FF2D20', pos: 'bottom-12 -right-6', delay: '0.1s' },
-          { label: 'Tailwind', icon: SiTailwindcss, color: '#38BDF8', pos: 'top-1/2 -left-10', delay: '0.2s' },
-          { label: 'PHP', icon: SiPhp, color: '#777BB4', pos: 'top-24 -right-8', delay: '0.3s' },
-          { label: 'MySQL', icon: SiMysql, color: '#4479A1', pos: 'bottom-24 -left-8', delay: '0.4s' },
-          { label: 'jQuery', icon: SiJquery, color: '#0769AD', pos: 'bottom-2 right-2', delay: '0.5s' },
-        ].map((chip) => (
-          <div
-            key={chip.label}
-            className={`absolute ${chip.pos} glass border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-sm font-mono font-semibold text-[var(--text-primary)] shadow-xl flex items-center gap-2 hover:scale-110 hover:border-[var(--accent)] hover:shadow-2xl hover:shadow-[var(--accent)]/30 transition-all duration-300 animate-fadeUp cursor-default`}
-            style={{ animationDelay: chip.delay }}
-          >
-            <chip.icon className="w-4 h-4 animate-float" style={{ color: chip.color, animationDelay: chip.delay }} />
-            {chip.label}
-          </div>
-        ))}
       </div>
     </section>
   );
