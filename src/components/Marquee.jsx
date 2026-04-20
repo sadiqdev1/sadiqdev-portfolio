@@ -32,29 +32,17 @@ export default function Marquee() {
   const doubled = [...items, ...items];
   return (
     <div className="py-4 overflow-hidden bg-[var(--bg-secondary)] border-y border-[var(--border-color)] group">
-      <div className="flex gap-8 md:gap-12 whitespace-nowrap animate-marquee group-hover:pause-animation">
+      <div className="flex gap-8 md:gap-12 whitespace-nowrap animate-marquee">
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-2 text-[var(--text-secondary)] text-sm font-medium flex-shrink-0"
+            className="inline-flex items-center gap-2 text-[var(--text-secondary)] text-sm font-medium flex-shrink-0 hover:text-[var(--text-primary)] transition-colors duration-200"
           >
-            <item.icon className="text-xl" style={{ color: item.color }} />
+            <item.icon className="text-xl flex-shrink-0" style={{ color: item.color }} />
             <span>{item.name}</span>
           </span>
         ))}
       </div>
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 25s linear infinite;
-        }
-        .group:hover .animate-marquee {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 }

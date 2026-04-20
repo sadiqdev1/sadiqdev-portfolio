@@ -1,16 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from "./components/Marquee";
 import About from "./components/About";
 import Skills from "./components/Skills";
+import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import LoadingScreen from "./components/LoadingScreen";
+import ScrollProgress from "./components/ScrollProgress";
+import BackToTop from "./components/BackToTop";
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    // Custom cursor (same as before, but uses var(--accent) via CSS)
+    // Hide loading screen after initial load
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    // Enhanced custom cursor with magnetic effect
     const dot = document.createElement('div');
     const ring = document.createElement('div');
     dot.className = 'cursor-dot';
@@ -28,16 +40,32 @@ export default function App() {
     };
     
     const animateRing = () => {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
       requestAnimationFrame(animateRing);
     };
     
+    // Add hover effect for interactive elements
+    const addHoverEffect = (e) => {
+      document.body.classList.add('cursor-hover');
+    };
+    
+    const removeHoverEffect = (e) => {
+      document.body.classList.remove('cursor-hover');
+    };
+    
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', addHoverEffect);
+      el.addEventListener('mouseleave', removeHoverEffect);
+    });
+    
     document.addEventListener('mousemove', onMouseMove);
     animateRing();
 
+    // Enhanced intersection observer with multiple animation types
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,29 +74,57 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
     );
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    // Observe all reveal elements — re-scan after a tick so all components have mounted
+    const observeAll = () => {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
+        .forEach((el) => observer.observe(el));
+    };
+
+    observeAll();
+    // Second pass after everything has rendered
+    const scanTimer = setTimeout(observeAll, 300);
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.body.removeChild(dot);
       document.body.removeChild(ring);
       observer.disconnect();
+      clearTimeout(scanTimer);
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', addHoverEffect);
+        el.removeEventListener('mouseleave', removeHoverEffect);
+      });
     };
   }, []);
 
   return (
-    <main style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', transition: 'background-color 0.3s, color 0.3s' }}>
-      <Navbar />
-      <Hero />
-      <Marquee />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      {isLoading && <LoadingScreen />}
+      <ScrollProgress />
+      <BackToTop />
+      
+      <main 
+        style={{ 
+          backgroundColor: 'var(--bg-primary)', 
+          color: 'var(--text-primary)', 
+          transition: 'background-color 0.3s, color 0.3s',
+          position: 'relative',
+        }}
+      >
+        <Navbar />
+        <Hero />
+        <Marquee />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Testimonials />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   );
 }

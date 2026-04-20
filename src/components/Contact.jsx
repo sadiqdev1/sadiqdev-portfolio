@@ -6,13 +6,14 @@ const EMAILJS_SERVICE_ID = 'service_tdty0ug';
 const EMAILJS_TEMPLATE_ID = 'template_ntyoq5b';
 const EMAILJS_PUBLIC_KEY = 'OTKo94BhJxQ8vRbAP';
 
+// Keep icons as JSX elements exactly like the original that worked
 const socials = [
-  { icon: <FaGithub />, label: 'GitHub', href: 'https://github.com/sadiqdev1' },
-  { icon: <FaLinkedinIn />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/sadiqdev1/' },
-  { icon: <FaTwitter />, label: 'Twitter', href: 'https://x.com/sadiqdev1' },
-  { icon: <FaInstagram />, label: 'Instagram', href: 'https://instagram.com/sadiqdev1' },
-  { icon: <FaFacebook />, label: 'Facebook', href: 'https://facebook.com/sadiqdev1' },
-  { icon: <FaTiktok />, label: 'Tiktok', href: 'https://tiktok.com/@sadiq.dev' },
+  { icon: <FaGithub />,     label: 'GitHub',    href: 'https://github.com/sadiqdev1' },
+  { icon: <FaLinkedinIn />, label: 'LinkedIn',  href: 'https://www.linkedin.com/in/sadiqdev1/' },
+  { icon: <FaTwitter />,    label: 'Twitter',   href: 'https://x.com/sadiqdev1' },
+  { icon: <FaInstagram />,  label: 'Instagram', href: 'https://instagram.com/sadiqdev1' },
+  { icon: <FaFacebook />,   label: 'Facebook',  href: 'https://facebook.com/sadiqdev1' },
+  { icon: <FaTiktok />,     label: 'TikTok',    href: 'https://tiktok.com/@sadiq.dev' },
 ];
 
 export default function Contact() {
@@ -37,6 +38,7 @@ export default function Contact() {
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
+  // Exact same handleSubmit as the original working version
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validate();
@@ -44,7 +46,6 @@ export default function Contact() {
       setErrors(newErrors);
       return;
     }
-
     setStatus('loading');
     try {
       await emailjs.send(
@@ -69,151 +70,79 @@ export default function Contact() {
     }
   };
 
+  const inputStyle = (hasError) => ({
+    padding: '0.875rem 1rem',
+    backgroundColor: 'var(--bg-primary)',
+    border: `1px solid ${hasError ? '#ef4444' : 'var(--border-color)'}`,
+    borderRadius: '0.625rem',
+    color: 'var(--text-primary)',
+    fontSize: '0.9rem',
+    outline: 'none',
+    width: '100%',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+    fontFamily: 'Space Grotesk, sans-serif',
+  });
+
+  const onFocus = (e) => {
+    e.target.style.borderColor = 'var(--accent)';
+    e.target.style.boxShadow = '0 0 0 3px var(--accent-glow)';
+  };
+  const onBlur = (e, hasError) => {
+    e.target.style.borderColor = hasError ? '#ef4444' : 'var(--border-color)';
+    e.target.style.boxShadow = 'none';
+  };
+
   return (
     <>
-      {/* WhatsApp floating button - improved size and sticky */}
+      {/* WhatsApp floating button */}
       <a
         href="https://wa.me/2348121934823"
         target="_blank"
         rel="noreferrer"
         title="Chat on WhatsApp"
-        style={{
-          position: 'fixed',
-          bottom: '1.5rem',
-          right: '1.5rem',
-          zIndex: 50,
-          width: '3rem',
-          height: '3rem',
-          backgroundColor: '#25D366',
-          color: '#fff',
-          borderRadius: '0.5rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '1.25rem',
-          boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
-          transition: 'transform 0.2s, background-color 0.2s',
-          textDecoration: 'none',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'scale(1.1)';
-          e.currentTarget.style.backgroundColor = '#128C7E';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.backgroundColor = '#25D366';
-        }}
+        className="fixed bottom-6 left-6 z-50 w-14 h-14 flex items-center justify-center rounded-2xl text-white text-2xl shadow-2xl hover:scale-110 transition-all duration-300"
+        style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)', boxShadow: '0 8px 32px rgba(37,211,102,0.4)' }}
       >
         <FaWhatsapp />
       </a>
 
       <section
         id="contact"
-        style={{
-          padding: '5rem 1rem', // reduced side padding on mobile
-          backgroundColor: 'var(--bg-primary)',
-          transition: 'background-color 0.3s ease',
-        }}
-        className="md:px-12"
+        className="py-24 px-6 md:px-12 bg-[var(--bg-primary)] transition-colors duration-300"
       >
-        <div style={{ maxWidth: '768px', margin: '0 auto' }} className="reveal">
+        <div className="max-w-3xl mx-auto reveal">
+
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <p
-              style={{
-                color: 'var(--accent)',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-              }}
-            >
-              Contact
+          <div className="text-center mb-14">
+            <p className="text-[var(--accent)] text-sm font-bold tracking-wider uppercase mb-3">
+              Get In Touch
             </p>
-            <h2
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 800,
-                fontSize: '2rem',
-                lineHeight: 1.2,
-                color: 'var(--text-primary)',
-                marginBottom: '0.75rem',
-              }}
-            >
-              Let's create something amazing
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl text-[var(--text-primary)] tracking-tight mb-4">
+              Let's build something{' '}
+              <span className="bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] bg-clip-text text-transparent">
+                amazing
+              </span>
             </h2>
-            <p
-              style={{
-                color: 'var(--text-secondary)',
-                fontSize: '0.9rem',
-              }}
-            >
+            <p className="text-[var(--text-secondary)] text-base max-w-md mx-auto">
               Got a project, an idea, or just want to say hi? I'd love to hear from you.
             </p>
           </div>
 
-          {/* Contact cards */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              gap: '1rem',
-              marginBottom: '2.5rem',
-            }}
-            className="md:grid-cols-2"
-          >
+          {/* Contact info cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
             <a
               href="mailto:sadiqdev2030@gmail.com"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                backgroundColor: 'var(--bg-secondary)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                textDecoration: 'none',
-                transition: 'transform 0.2s, border-color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'var(--accent)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-              }}
+              className="pro-card flex items-center gap-4 group no-underline"
             >
               <div
-                style={{
-                  width: '2.5rem',
-                  height: '2.5rem',
-                  backgroundColor: 'var(--accent)',
-                  borderRadius: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '1.2rem',
-                }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid))' }}
               >
                 <FaEnvelope />
               </div>
               <div>
-                <div
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                    marginBottom: '0.2rem',
-                  }}
-                >
-                  Email
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                <div className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)] mb-0.5">Email</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors duration-300">
                   sadiqdev2030@gmail.com
                 </div>
               </div>
@@ -223,55 +152,17 @@ export default function Contact() {
               href="https://wa.me/2348121934823"
               target="_blank"
               rel="noreferrer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                backgroundColor: 'var(--bg-secondary)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '0.5rem',
-                padding: '1rem',
-                textDecoration: 'none',
-                transition: 'transform 0.2s, border-color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'var(--accent)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-              }}
+              className="pro-card flex items-center gap-4 group no-underline"
             >
               <div
-                style={{
-                  width: '2.5rem',
-                  height: '2.5rem',
-                  backgroundColor: '#25D366',
-                  borderRadius: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '1.2rem',
-                }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}
               >
                 <FaWhatsapp />
               </div>
               <div>
-                <div
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                    marginBottom: '0.2rem',
-                  }}
-                >
-                  WhatsApp
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                <div className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)] mb-0.5">WhatsApp</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors duration-300">
                   +234 812 193 4823
                 </div>
               </div>
@@ -280,305 +171,112 @@ export default function Contact() {
 
           {/* Status messages */}
           {status === 'success' && (
-            <div
-              style={{
-                backgroundColor: 'rgba(16,185,129,0.1)',
-                border: '1px solid rgba(16,185,129,0.3)',
-                color: '#10b981',
-                borderRadius: '0.5rem',
-                padding: '0.75rem 1rem',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                textAlign: 'center',
-                marginBottom: '1.5rem',
-              }}
-            >
+            <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl px-5 py-4 text-sm font-semibold mb-6">
+              <span className="text-lg">✓</span>
               Message sent successfully! I'll get back to you soon.
             </div>
           )}
           {status === 'error' && (
-            <div
-              style={{
-                backgroundColor: 'rgba(239,68,68,0.1)',
-                border: '1px solid rgba(239,68,68,0.3)',
-                color: '#ef4444',
-                borderRadius: '0.5rem',
-                padding: '0.75rem 1rem',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                textAlign: 'center',
-                marginBottom: '1.5rem',
-              }}
-            >
+            <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl px-5 py-4 text-sm font-semibold mb-6">
+              <span className="text-lg">✕</span>
               Something went wrong. Please try again or email me directly.
             </div>
           )}
 
-          {/* Contact form */}
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              backgroundColor: 'var(--bg-secondary)',
-              borderRadius: '0.5rem',
-              padding: '1rem', // reduced for mobile
-              border: '1px solid var(--border-color)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.25rem',
-            }}
-            className="md:p-8"
-          >
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                gap: '1rem',
-              }}
-              className="md:grid-cols-2"
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label
-                  htmlFor="name"
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="pro-card flex flex-col gap-5" style={{ padding: '2rem' }}>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* Name */}
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)]">
                   Name
                 </label>
                 <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
+                  type="text" id="name" name="name"
+                  value={form.name} onChange={handleChange}
                   placeholder="Your name"
-                  style={{
-                    padding: '0.75rem',
-                    backgroundColor: 'var(--bg-primary)',
-                    border: `1px solid ${errors.name ? '#ef4444' : 'var(--border-color)'}`,
-                    borderRadius: '0.5rem',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                  }}
-                  onFocus={(e) => {
-                    if (!errors.name) {
-                      e.target.style.borderColor = 'var(--accent)';
-                      e.target.style.boxShadow = '0 0 0 2px rgba(59,130,246,0.3)';
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (!errors.name) {
-                      e.target.style.borderColor = 'var(--border-color)';
-                      e.target.style.boxShadow = 'none';
-                    }
-                  }}
+                  style={inputStyle(errors.name)}
+                  onFocus={onFocus}
+                  onBlur={(e) => onBlur(e, errors.name)}
                 />
-                {errors.name && <span style={{ fontSize: '0.7rem', color: '#ef4444' }}>{errors.name}</span>}
+                {errors.name && <span className="text-xs text-red-400 font-medium">{errors.name}</span>}
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label
-                  htmlFor="email"
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
+              {/* Email */}
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)]">
                   Email
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
+                  type="email" id="email" name="email"
+                  value={form.email} onChange={handleChange}
                   placeholder="your@email.com"
-                  style={{
-                    padding: '0.75rem',
-                    backgroundColor: 'var(--bg-primary)',
-                    border: `1px solid ${errors.email ? '#ef4444' : 'ar(--border-color)'}`,
-                    borderRadius: '0.5rem',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                  }}
-                  onFocus={(e) => {
-                    if (!errors.email) {
-                      e.target.style.borderColor = 'var(--accent)';
-                      e.target.style.boxShadow = '0 0 0 2px rgba(59,130,246,0.3)';
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (!errors.email) {
-                      e.target.style.borderColor = 'var(--border-color)';
-                      e.target.style.boxShadow = 'none';
-                    }
-                  }}
+                  style={inputStyle(errors.email)}
+                  onFocus={onFocus}
+                  onBlur={(e) => onBlur(e, errors.email)}
                 />
-                {errors.email && <span style={{ fontSize: '0.7rem', color: '#ef4444' }}>{errors.email}</span>}
+                {errors.email && <span className="text-xs text-red-400 font-medium">{errors.email}</span>}
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label
-                htmlFor="subject"
-                style={{
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-secondary)',
-                }}
-              >
+            {/* Subject */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="subject" className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)]">
                 Subject
               </label>
               <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
+                type="text" id="subject" name="subject"
+                value={form.subject} onChange={handleChange}
                 placeholder="What's this about?"
-                style={{
-                  padding: '0.75rem',
-                  backgroundColor: 'var(--bg-primary)',
-                  border: `1px solid ${errors.subject ? '#ef4444' : 'var(--border-color)'}`,
-                  borderRadius: '0.5rem',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.875rem',
-                  outline: 'none',
-                  transition: 'border-color 0.2s, box-shadow 0.2s',
-                }}
-                onFocus={(e) => {
-                  if (!errors.subject) {
-                    e.target.style.borderColor = 'var(--accent)';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(59,130,246,0.3)';
-                  }
-                }}
-                onBlur={(e) => {
-                  if (!errors.subject) {
-                    e.target.style.borderColor = 'var(--border-color)';
-                    e.target.style.boxShadow = 'none';
-                  }
-                }}
+                style={inputStyle(errors.subject)}
+                onFocus={onFocus}
+                onBlur={(e) => onBlur(e, errors.subject)}
               />
-              {errors.subject && <span style={{ fontSize: '0.7rem', color: '#ef4444' }}>{errors.subject}</span>}
+              {errors.subject && <span className="text-xs text-red-400 font-medium">{errors.subject}</span>}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label
-                htmlFor="message"
-                style={{
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-secondary)',
-                }}
-              >
+            {/* Message */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)]">
                 Message
               </label>
               <textarea
-                id="message"
-                name="message"
-                rows={5}
-                value={form.message}
-                onChange={handleChange}
+                id="message" name="message" rows={5}
+                value={form.message} onChange={handleChange}
                 placeholder="Tell me about your project or idea..."
-                style={{
-                  padding: '0.75rem',
-                  backgroundColor: 'var(--bg-primary)',
-                  border: `1px solid ${errors.message ? '#ef4444' : 'var(--border-color)'}`,
-                  borderRadius: '0.5rem',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.875rem',
-                  outline: 'none',
-                  transition: 'border-color 0.2s, box-shadow 0.2s',
-                  resize: 'vertical',
-                }}
-                onFocus={(e) => {
-                  if (!errors.message) {
-                    e.target.style.borderColor = 'var(--accent)';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(59,130,246,0.3)';
-                  }
-                }}
-                onBlur={(e) => {
-                  if (!errors.message) {
-                    e.target.style.borderColor = 'var(--border-color)';
-                    e.target.style.boxShadow = 'none';
-                  }
-                }}
+                style={{ ...inputStyle(errors.message), resize: 'vertical' }}
+                onFocus={onFocus}
+                onBlur={(e) => onBlur(e, errors.message)}
               />
-              {errors.message && <span style={{ fontSize: '0.7rem', color: '#ef4444' }}>{errors.message}</span>}
+              {errors.message && <span className="text-xs text-red-400 font-medium">{errors.message}</span>}
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={status === 'loading'}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                backgroundColor: 'var(--accent)',
-                color: '#fff',
-                padding: '0.75rem',
-                borderRadius: '0.5rem',
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                border: 'none',
-                cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                transition: 'background-color 0.2s',
-                opacity: status === 'loading' ? 0.7 : 1,
-              }}
-              onMouseEnter={(e) => {
-                if (status !== 'loading') e.currentTarget.style.backgroundColor = 'var(--accent-hover)';
-              }}
-              onMouseLeave={(e) => {
-                if (status !== 'loading') e.currentTarget.style.backgroundColor = 'var(--accent)';
-              }}
+              className="relative flex items-center justify-center gap-3 text-white font-bold text-sm py-4 rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--accent)]/30 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+              style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid))', border: 'none', cursor: status === 'loading' ? 'not-allowed' : 'pointer' }}
             >
               {status === 'loading' ? (
                 <>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      width: '1rem',
-                      height: '1rem',
-                      border: '2px solid #fff',
-                      borderTopColor: 'transparent',
-                      borderRadius: '50%',
-                      animation: 'spin 0.6s linear infinite',
-                    }}
-                  />
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   Sending...
                 </>
               ) : (
-                'Send Message'
+                <>
+                  Send Message
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </>
               )}
             </button>
           </form>
 
           {/* Social links */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '0.75rem',
-              marginTop: '2rem',
-              flexWrap: 'wrap',
-            }}
-          >
+          <div className="flex justify-center gap-3 mt-10 flex-wrap">
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -586,46 +284,15 @@ export default function Contact() {
                 target="_blank"
                 rel="noreferrer"
                 title={s.label}
-                style={{
-                  width: '2.5rem',
-                  height: '2.5rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid var(--border-color)',
-                  backgroundColor: 'var(--bg-secondary)',
-                  color: 'var(--text-secondary)',
-                  fontSize: '1.1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.2s',
-                  textDecoration: 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--accent)';
-                  e.currentTarget.style.color = '#fff';
-                  e.currentTarget.style.borderColor = 'var(--accent)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                  e.currentTarget.style.color = 'var(--text-secondary)';
-                  e.currentTarget.style.borderColor = 'var(--border-color)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                className="w-11 h-11 rounded-xl glass border border-[var(--border-color)] text-[var(--text-secondary)] text-lg flex items-center justify-center hover:border-[var(--accent)] hover:text-[var(--accent)] hover:-translate-y-1 hover:shadow-lg hover:shadow-[var(--accent)]/20 transition-all duration-300"
               >
                 {s.icon}
               </a>
             ))}
           </div>
+
         </div>
       </section>
-
-      {/* Add spinner animation globally */}
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </>
   );
 }

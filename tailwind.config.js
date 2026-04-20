@@ -8,22 +8,33 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        tighter: '-0.04em',
+        tight: '-0.02em',
+        normal: '0em',
+        wide: '0.05em',
+        wider: '0.1em',
+        widest: '0.15em',
       },
       colors: {
         // Dark theme (default)
         dark: {
-          bg: '#0a0f1c',
-          card: '#0f1422',
-          border: '#1f2937',
+          bg: '#0a0a0f',
+          card: '#16161f',
+          border: '#27273a',
         },
-        // Accent colors
+        // Accent colors - Modern palette
         accent: {
-          blue: '#3b82f6',
-          blueDark: '#2563eb',
-          cyan: '#06b6d4',
-          emerald: '#10b981',
+          primary: '#6366f1',
+          secondary: '#8b5cf6',
+          tertiary: '#ec4899',
+          blue: '#6366f1',
+          purple: '#8b5cf6',
+          pink: '#ec4899',
         },
       },
       animation: {

@@ -31,25 +31,23 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="reveal mb-12">
-          <p className="text-[var(--accent)] text-xs font-semibold tracking-wider uppercase mb-3">
-            Projects
+          <p className="text-[var(--accent)] text-sm font-bold tracking-wider uppercase mb-3">
+            Featured Work
           </p>
-          <h2 className="font-sans font-extrabold text-3xl md:text-4xl text-[var(--text-primary)]">
-            Things I've built
+          <h2 className="font-display font-extrabold text-4xl md:text-5xl text-[var(--text-primary)] tracking-tight">
+            Things I've Built
           </h2>
         </div>
 
         {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
           {/* Real project */}
           {projects.map((project, idx) => {
             const isHovered = hoveredIndex === idx;
             return (
               <div
                 key={idx}
-                className={`relative block bg-[var(--bg-secondary)] border rounded-lg overflow-hidden transition-all duration-200 ${
-                  isHovered ? 'border-[var(--accent)] -translate-y-1' : 'border-[var(--border-color)] translate-y-0'
-                }`}
+                className="pro-card group relative overflow-hidden p-0"
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -58,30 +56,33 @@ export default function Projects() {
                   <img
                     src={project.img}
                     alt={project.name}
-                    className={`w-full h-48 object-cover transition-transform duration-500 ${
-                      isHovered ? 'scale-105' : 'scale-100'
+                    className={`w-full h-56 object-cover transition-all duration-700 ${
+                      isHovered ? 'scale-110 blur-sm' : 'scale-100 blur-0'
                     }`}
                   />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60" />
+                  
                   {/* Overlay on hover */}
                   <div
-                    className={`absolute inset-0 bg-[var(--bg-primary)] flex justify-center items-center gap-4 transition-opacity duration-300 ${
-                      isHovered ? 'opacity-95' : 'opacity-0'
+                    className={`absolute inset-0 bg-[var(--bg-primary)]/95 backdrop-blur-sm flex justify-center items-center gap-4 transition-all duration-500 ${
+                      isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                     }`}
                   >
                     <a
                       href={project.liveLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 bg-[var(--accent)] text-white px-4 py-2 rounded-md text-sm font-medium no-underline"
+                      className="flex items-center gap-2 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-6 py-3 rounded-xl text-sm font-semibold no-underline hover:scale-105 transition-transform duration-300 shadow-lg"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <FiExternalLink /> Live
+                      <FiExternalLink /> Live Demo
                     </a>
                     <a
                       href={project.repoLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 bg-[var(--bg-secondary)] text-[var(--text-primary)] px-4 py-2 rounded-md text-sm font-medium border border-[var(--border-color)] no-underline"
+                      className="flex items-center gap-2 glass text-[var(--text-primary)] px-6 py-3 rounded-xl text-sm font-semibold border border-[var(--border-color)] no-underline hover:scale-105 hover:border-[var(--accent)] transition-all duration-300"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <FiGithub /> Code
@@ -90,24 +91,24 @@ export default function Projects() {
                 </div>
 
                 {/* Content */}
-                <div className="p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-sans font-bold text-lg text-[var(--text-primary)]">
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-display font-bold text-xl text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors duration-300">
                       {project.name}
                     </h3>
                     {/* Stars badge */}
-                    <span className="flex items-center gap-1 bg-[var(--bg-primary)] px-2 py-0.5 rounded border border-[var(--border-color)] text-xs font-medium text-[var(--text-primary)]">
-                      <FiStar className="text-yellow-400 text-xs" />
+                    <span className="flex items-center gap-1.5 glass px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-sm font-semibold text-[var(--text-primary)]">
+                      <FiStar className="text-yellow-400" />
                       {project.stars}
                     </span>
                   </div>
 
                   {/* Tech icons */}
-                  <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="flex flex-wrap gap-3 mb-4">
                     {project.tech.map((tech, i) => (
-                      <div key={i} className="flex items-center gap-1">
-                        <tech.icon style={{ color: tech.color, fontSize: '0.9rem' }} />
-                        <span className="text-xs text-[var(--text-secondary)]">{tech.name}</span>
+                      <div key={i} className="flex items-center gap-2 glass px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
+                        <tech.icon style={{ color: tech.color, fontSize: '1rem' }} />
+                        <span className="text-xs font-medium text-[var(--text-secondary)]">{tech.name}</span>
                       </div>
                     ))}
                   </div>
@@ -116,20 +117,24 @@ export default function Projects() {
                     {project.desc}
                   </p>
                 </div>
+
+                {/* Decorative gradient */}
+                <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-700" />
               </div>
             );
           })}
 
           {/* "More coming soon" placeholder card */}
-          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg flex flex-col justify-center items-center text-center p-8 opacity-80 transition-opacity duration-200 hover:opacity-100">
-            <FiClock className="text-5xl text-[var(--accent)] mb-4" />
-            <h3 className="font-sans font-semibold text-xl text-[var(--text-primary)] mb-2">
+          <div className="pro-card flex flex-col justify-center items-center text-center p-10 group cursor-default">
+            <div className="relative mb-6">
+              <FiClock className="text-6xl text-[var(--accent)] group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-[var(--accent)] blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
+            </div>
+            <h3 className="font-display font-bold text-2xl text-[var(--text-primary)] mb-3">
               More Projects Coming
             </h3>
-            <p className="text-sm text-[var(--text-secondary)]">
-              I'm currently working on several exciting new projects.
-              <br />
-              Check back soon for updates.
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs">
+              I'm currently working on several exciting new projects. Check back soon for updates and new features.
             </p>
           </div>
         </div>

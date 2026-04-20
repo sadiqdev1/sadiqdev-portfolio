@@ -8,52 +8,54 @@ export default function Navbar() {
 
   const links = ["Home", "About", "Skills", "Projects", "Contact"];
 
-  // Theme initialization
+  // Theme initialization - Default to dark
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // Default to dark theme
     if (saved === "light") {
       setIsDark(false);
       document.documentElement.classList.remove("dark");
-    } else if (saved === "dark") {
-      setIsDark(true);
-      document.documentElement.classList.add("dark");
-    } else if (prefersDark) {
-      setIsDark(true);
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("light");
     } else {
-      setIsDark(false);
-      document.documentElement.classList.remove("dark");
+      // Dark is default
+      setIsDark(true);
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      if (!saved) {
+        localStorage.setItem("theme", "dark");
+      }
     }
   }, []);
 
   // Scroll shadow & active link detection
   useEffect(() => {
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'contact'];
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      const sections = links.map((link) => link.toLowerCase());
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveLink(section);
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActiveLink(id === 'hero' ? 'home' : id);
             break;
           }
         }
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [links]);
+  }, []);
 
   const toggleTheme = () => {
     const newDark = !isDark;
     setIsDark(newDark);
     if (newDark) {
       document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
       localStorage.setItem("theme", "dark");
     } else {
+      document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
@@ -81,9 +83,9 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={(e) => handleLinkClick(e, "hero")}
-          className="font-sans font-extrabold text-2xl text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+          className="font-display font-extrabold text-2xl text-[var(--text-primary)] hover:text-[var(--accent)] transition-all duration-300 cursor-pointer group"
         >
-          Sadiq<span className="text-[var(--accent)]">Dev</span>
+          Sadiq<span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent group-hover:from-[var(--gradient-end)] group-hover:to-[var(--gradient-start)] transition-all duration-500">Dev</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -116,7 +118,7 @@ export default function Navbar() {
         <div className="flex gap-3 items-center">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-md bg-[var(--bg-secondary)] text-[var(--text-primary)] text-xl hover:bg-[var(--accent)] hover:text-white transition-colors"
+            className="p-2.5 rounded-lg glass border border-[var(--border-color)] text-[var(--text-primary)] text-lg hover:border-[var(--accent)] hover:scale-110 transition-all duration-300"
             aria-label="Toggle dark/light mode"
           >
             {isDark ? "☀️" : "🌙"}
@@ -125,17 +127,23 @@ export default function Navbar() {
           <a
             href="/resume.pdf"
             download
-            className="hidden md:inline-flex border border-[var(--border-color)] text-[var(--text-secondary)] px-5 py-2 rounded-md text-sm font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+            className="hidden md:inline-flex items-center gap-2 glass border border-[var(--border-color)] text-[var(--text-secondary)] px-5 py-2.5 rounded-lg text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] hover:scale-105 transition-all duration-300"
           >
-            Resume ↓
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Resume
           </a>
 
           <a
             href="#contact"
             onClick={(e) => handleLinkClick(e, "contact")}
-            className="hidden md:inline-block bg-[var(--accent)] text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors shadow-md shadow-[var(--accent)]/20"
+            className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-[var(--accent)]/50 hover:scale-105 transition-all duration-300"
           >
-            Contact →
+            Contact
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
 
           {/* Mobile menu button */}
@@ -152,39 +160,44 @@ export default function Navbar() {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`md:hidden absolute left-0 top-full w-full bg-[var(--bg-primary)] border-t border-[var(--border-color)] overflow-hidden transition-all duration-300 ${
+        className={`md:hidden absolute left-0 top-full w-full glass border-t border-[var(--border-color)] overflow-hidden transition-all duration-300 ${
           open ? "max-h-96 opacity-100 py-6" : "max-h-0 opacity-0 py-0"
         }`}
       >
-        <ul className="flex flex-col items-center gap-6 list-none">
+        <ul className="flex flex-col items-center gap-5 list-none">
           {links.map((link) => {
             const linkId = link.toLowerCase();
+            const isActive = activeLink === linkId;
             return (
               <li key={link}>
                 <a
                   href={`#${linkId}`}
                   onClick={(e) => handleLinkClick(e, linkId === "home" ? "hero" : linkId)}
-                  className="text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+                  className={`text-base font-semibold transition-colors duration-200 ${
+                    isActive ? 'text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:text-[var(--accent)]'
+                  }`}
                 >
                   {link}
                 </a>
               </li>
             );
           })}
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "contact")}
-            className="bg-[var(--accent)] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors"
-          >
-            Contact →
-          </a>
-          <a
-            href="/resume.pdf"
-            download
-            className="border border-[var(--border-color)] text-[var(--text-secondary)] px-6 py-2 rounded-md text-sm font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
-          >
-            Resume ↓
-          </a>
+          <div className="flex gap-3 pt-2">
+            <a
+              href="#contact"
+              onClick={(e) => handleLinkClick(e, "contact")}
+              className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-mid)] text-white px-6 py-2.5 rounded-xl text-sm font-semibold"
+            >
+              Contact
+            </a>
+            <a
+              href="/resume.pdf"
+              download
+              className="glass border border-[var(--border-color)] text-[var(--text-secondary)] px-6 py-2.5 rounded-xl text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+            >
+              Resume
+            </a>
+          </div>
         </ul>
       </div>
     </nav>
