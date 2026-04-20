@@ -2,7 +2,7 @@ import { FiCode, FiZap, FiMonitor, FiGlobe } from 'react-icons/fi';
 import profileImg from '../assets/profile.jpg';
 
 const stats = [
-  { value: '8+',   label: 'Projects Completed' },
+  { value: '15+',   label: 'Projects Completed' },
   { value: '10+',  label: 'Technologies' },
   { value: '100%', label: 'Commitment' },
 ];
@@ -78,10 +78,41 @@ export default function About() {
               </svg>
               Download CV
             </a>
+
+            {/* Currently Learning */}
+            <div className="mt-8 w-full">
+              <h3 className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)] mb-3">
+                Currently Learning
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {['Next.js', 'TypeScript', 'Docker', 'AWS'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="glass px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Right — code block */}
-          <div className="reveal w-full">
+          {/* Right — GitHub Stats + Code block */}
+          <div className="reveal w-full space-y-6">
+            {/* GitHub Stats */}
+            <div className="rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)] p-4">
+              <h3 className="text-xs font-bold tracking-widest uppercase text-[var(--text-tertiary)] mb-4">
+                GitHub Activity
+              </h3>
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=sadiqdev1&show_icons=true&theme=transparent&hide_border=true&title_color=6366f1&icon_color=8b5cf6&text_color=a0a0ab&bg_color=16161f"
+                alt="GitHub Stats"
+                className="w-full"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Code block */}
             <div className="rounded-xl overflow-hidden border border-[var(--border-color)] shadow-2xl">
               {/* Title bar */}
               <div className="flex items-center gap-2 px-4 py-3 bg-[var(--bg-tertiary)] border-b border-[var(--border-color)]">

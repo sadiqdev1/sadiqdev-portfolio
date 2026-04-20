@@ -6,6 +6,7 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Blog from "./components/Blog";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -15,6 +16,7 @@ import BackToTop from "./components/BackToTop";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     // Hide loading screen after initial load
@@ -106,12 +108,36 @@ export default function App() {
       <ScrollProgress />
       <BackToTop />
       
+      {/* Available for Hire Banner */}
+      {showBanner && (
+        <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-center py-2.5 text-sm font-semibold shadow-lg animate-slideInDown">
+          <div className="flex items-center justify-center gap-3 px-4">
+            <span className="hidden sm:inline">✨</span>
+            <span>Available for freelance projects</span>
+            <a
+              href="/hire-me"
+              className="underline hover:text-emerald-100 transition-colors"
+            >
+              Hire Me
+            </a>
+            <button
+              onClick={() => setShowBanner(false)}
+              className="ml-4 hover:text-emerald-100 transition-colors"
+              aria-label="Close banner"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+      
       <main 
         style={{ 
           backgroundColor: 'var(--bg-primary)', 
           color: 'var(--text-primary)', 
           transition: 'background-color 0.3s, color 0.3s',
           position: 'relative',
+          paddingTop: showBanner ? '40px' : '0',
         }}
       >
         <Navbar />
@@ -121,6 +147,7 @@ export default function App() {
         <Skills />
         <Experience />
         <Projects />
+        <Blog />
         <Testimonials />
         <Contact />
         <Footer />

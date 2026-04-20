@@ -13,10 +13,14 @@ const projects = [
       { name: 'Tailwind', icon: SiTailwindcss, color: '#38BDF8' },
       { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
     ],
+    problem: 'Users needed an engaging platform to share and discover memes with a community.',
+    solution: 'Built a full-stack meme sharing platform with voting, comments, and premium features.',
+    results: '500+ active users, 2000+ memes shared, integrated Stripe payment gateway.',
     desc: 'A full‑stack meme sharing platform where users can upload, vote, and comment on memes. Integrated with payment gateway for premium features.',
     liveLink: 'https://chortle-production.up.railway.app/',
     repoLink: 'https://chortle-production.up.railway.app/',
     stars: 24,
+    featured: true,
   },
 ];
 
@@ -78,15 +82,14 @@ export default function Projects() {
                     >
                       <FiExternalLink /> Live Demo
                     </a>
-                    <a
-                      href={project.repoLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 glass text-[var(--text-primary)] px-6 py-3 rounded-xl text-sm font-semibold border border-[var(--border-color)] no-underline hover:scale-105 hover:border-[var(--accent)] transition-all duration-300"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FiGithub /> Code
-                    </a>
+                    {project.featured && (
+                      <button
+                        onClick={() => window.location.href = '/projects/chortle'}
+                        className="flex items-center gap-2 glass text-[var(--text-primary)] px-6 py-3 rounded-xl text-sm font-semibold border border-[var(--border-color)] hover:scale-105 hover:border-[var(--accent)] transition-all duration-300"
+                      >
+                        📖 Case Study
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -113,9 +116,16 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
                     {project.desc}
                   </p>
+
+                  {/* Results badge */}
+                  {project.results && (
+                    <div className="glass px-3 py-2 rounded-lg border border-[var(--border-color)] text-xs text-[var(--text-primary)]">
+                      <span className="font-bold text-[var(--accent)]">Results:</span> {project.results}
+                    </div>
+                  )}
                 </div>
 
                 {/* Decorative gradient */}
