@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaReact } from 'react-icons/fa';
 import { SiLaravel, SiTailwindcss, SiPhp, SiMysql, SiJquery } from 'react-icons/si';
-import ParticleBackground from './ParticleBackground';
+import ThreeBackground from './ThreeBackground';
 
 export default function Hero() {
   const [displayText, setDisplayText] = useState('');
@@ -33,8 +33,8 @@ export default function Hero() {
       id="hero"
       className="min-h-screen pt-28 pb-16 px-6 md:px-12 bg-[var(--bg-primary)] grid md:grid-cols-2 gap-12 items-center relative overflow-hidden"
     >
-      {/* Particle Background */}
-      <ParticleBackground />
+      {/* Three.js Particle Background */}
+      <ThreeBackground />
 
       {/* Gradient orbs */}
       <div

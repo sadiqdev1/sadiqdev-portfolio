@@ -6,7 +6,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
 
-  const links = ["Home", "About", "Skills", "Projects", "Contact"];
+  const links = ["Home", "About", "Skills", "Projects", "Services", "Contact"];
 
   // Theme initialization - Default to dark
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Navbar() {
 
   // Scroll shadow & active link detection
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'skills', 'projects', 'contact'];
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'services', 'contact'];
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       for (const id of sectionIds) {
