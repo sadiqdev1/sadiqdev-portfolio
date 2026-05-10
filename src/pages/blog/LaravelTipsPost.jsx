@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import SEO from '../../components/SEO';
+import BlogHero from '../../components/BlogHero';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -70,6 +71,18 @@ export default function LaravelTipsPost() {
         >
           <FiArrowLeft /> Back to Portfolio
         </button>
+
+        {/* Hero Thumbnail */}
+        <BlogHero
+          gradient="from-red-600 via-orange-500 to-red-700"
+          logos={[
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg',
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
+          ]}
+          label="Laravel & PHP"
+          date="February 2024"
+          readTime="5 min read"
+        />
 
         <header className="mb-12">
           <div className="flex flex-wrap gap-2 mb-4">

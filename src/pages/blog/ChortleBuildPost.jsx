@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import SEO from '../../components/SEO';
+import BlogHero from '../../components/BlogHero';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -71,6 +72,18 @@ export default function ChortleBuildPost() {
         >
           <FiArrowLeft /> Back to Portfolio
         </button>
+
+        {/* Hero Thumbnail */}
+        <BlogHero
+          gradient="from-cyan-500 via-blue-600 to-indigo-700"
+          logos={[
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg',
+          ]}
+          label="React + Laravel"
+          date="March 2024"
+          readTime="8 min read"
+        />
 
         {/* Header */}
         <header className="mb-12">

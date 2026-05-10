@@ -4,6 +4,7 @@ import { FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiLaravel, SiTailwindcss, SiPhp, SiMysql, SiJavascript } from 'react-icons/si';
 import { useState, useEffect } from 'react';
 import SEO from '../../components/SEO';
+import BlogHero from '../../components/BlogHero';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -151,6 +152,15 @@ export default function WhoIsSadiqDevPost() {
           >
             <FiArrowLeft /> Back to Portfolio
           </button>
+
+          {/* Hero Thumbnail */}
+          <BlogHero
+            gradient="from-violet-600 via-indigo-600 to-blue-600"
+            icon="👨‍💻"
+            label="About SadiqDev1"
+            date="April 2024"
+            readTime="7 min read"
+          />
 
           {/* Header */}
           <header className="mb-12">

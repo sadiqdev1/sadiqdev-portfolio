@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiCalendar } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import SEO from '../../components/SEO';
+import BlogHero from '../../components/BlogHero';
 import LoadingScreen from '../../components/LoadingScreen';
 import ScrollProgress from '../../components/ScrollProgress';
 import BackToTop from '../../components/BackToTop';
@@ -70,6 +71,15 @@ export default function JourneyPost() {
         >
           <FiArrowLeft /> Back to Portfolio
         </button>
+
+        {/* Hero Thumbnail */}
+        <BlogHero
+          gradient="from-emerald-500 via-teal-500 to-cyan-600"
+          icon="🚀"
+          label="Career Journey"
+          date="January 2024"
+          readTime="6 min read"
+        />
 
         <header className="mb-12">
           <div className="flex flex-wrap gap-2 mb-4">
