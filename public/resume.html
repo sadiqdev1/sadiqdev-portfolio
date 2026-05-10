@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abubakar Ibrahim – Resume</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+      --tag-bg: #f3f4f6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 32px auto;
+      background: var(--bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+      padding: 36px 40px 32px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 3px solid rgba(99,102,241,0.6);
+      flex-shrink: 0;
+    }
+
+    .header-info h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .header-info .title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #a5b4fc;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .header-info .tagline {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 6px;
+      max-width: 420px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .contact-row a, .contact-row span {
+      font-size: 11.5px;
+      color: #c7d2fe;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-row a:hover { color: #ffffff; }
+
+    /* ── BODY ── */
+    .body {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 0;
+    }
+
+    .main { padding: 32px 36px; border-right: 1px solid var(--border); }
+    .sidebar { padding: 32px 28px; background: #fafafa; }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 28px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ── EXPERIENCE ── */
+    .job { margin-bottom: 20px; }
+    .job:last-child { margin-bottom: 0; }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .job-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .job-period {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--tag-bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .job-company {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .job-desc {
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    .achievements {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .achievements li {
+      font-size: 12px;
+      color: #4b5563;
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      line-height: 1.5;
+    }
+
+    .achievements li::before {
+      content: '▸';
+      color: var(--accent);
+      font-size: 10px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    .project {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .project:last-child { margin-bottom: 0; }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .project-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .project-link {
+      font-size: 10.5px;
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--tag-bg);
+      color: #374151;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── SIDEBAR SKILLS ── */
+    .skill-group { margin-bottom: 18px; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-group-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 5px;
+      background: #ede9fe;
+      color: #5b21b6;
+    }
+
+    .skill-tag.green { background: #d1fae5; color: #065f46; }
+    .skill-tag.blue  { background: #dbeafe; color: #1e40af; }
+    .skill-tag.gray  { background: #f3f4f6; color: #374151; }
+
+    /* ── EDUCATION ── */
+    .edu-item { margin-bottom: 12px; }
+    .edu-degree { font-size: 12.5px; font-weight: 600; color: var(--text); }
+    .edu-school { font-size: 12px; color: var(--accent); font-weight: 500; }
+    .edu-year   { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: #6d28d9;
+      margin-top: 2px;
+    }
+
+    /* ── LINKS ── */
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .link-item a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .link-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: #ede9fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ── AVAILABILITY ── */
+    .availability {
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 18px;
+    }
+
+    .availability-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .availability-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #065f46;
+    }
+
+    .availability-sub {
+      font-size: 11px;
+      color: #047857;
+      margin-top: 3px;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; font-size: 12px; }
+      .page { margin: 0; border-radius: 0; box-shadow: none; max-width: 100%; }
+      a { color: inherit !important; }
+    }
+
+    @page {
+      margin: 0.4in;
+      size: A4;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <img src="/profile1.webp" alt="Abubakar Ibrahim" class="avatar" />
+      <div class="header-info">
+        <h1>Abubakar Ibrahim</h1>
+        <div class="title">Full-Stack Developer &nbsp;·&nbsp; @sadiqdev1</div>
+        <div class="tagline">
+          Building scalable web applications with React &amp; Laravel. 3+ years of experience delivering high-performance solutions for clients worldwide.
+        </div>
+        <div class="contact-row">
+          <a href="mailto:sadiqdev2030@gmail.com">✉ sadiqdev2030@gmail.com</a>
+          <a href="https://wa.me/2348121934823">📱 +234 812 193 4823</a>
+          <span>📍 Lagos, Nigeria (Remote)</span>
+          <a href="https://sadiqdev-portfolio.vercel.app">🌐 sadiqdev-portfolio.vercel.app</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+
+      <!-- MAIN COLUMN -->
+      <div class="main">
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+          <div class="section-title">Experience</div>
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Freelance Full-Stack Developer</div>
+              <div class="job-period">Jan 2023 – Present</div>
+            </div>
+            <div class="job-company">Self-Employed · Remote</div>
+            <div class="job-desc">
+              Building custom web applications for international clients, specializing in React + Laravel full-stack solutions, e-commerce platforms, and REST APIs.
+            </div>
+            <ul class="achievements">
+              <li>Completed 15+ projects for clients across Nigeria, UK, and the US</li>
+              <li>Built Chortle — a full-stack meme platform with 500+ users and Stripe integration</li>
+              <li>Maintained 5-star client satisfaction rating across all engagements</li>
+              <li>Reduced average page load time by 40–60% through performance optimization</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Junior Web Developer</div>
+              <div class="job-period">Jan 2021 – Dec 2022</div>
+            </div>
+            <div class="job-company">Piona Tech Solution · Lagos, Nigeria</div>
+            <div class="job-desc">
+              Developed responsive websites and web applications for clients using HTML, CSS, JavaScript, React, and Laravel.
+            </div>
+            <ul class="achievements">
+              <li>Delivered 5 client websites from design to deployment</li>
+              <li>Improved page speed scores by 40% through asset optimization</li>
+              <li>Learned and applied React and Laravel in production environments</li>
+              <li>Collaborated with design and product teams using Git and Agile workflows</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section">
+          <div class="section-title">Featured Projects</div>
+
+          <div class="project">
+            <div class="project-header">
+              <div class="project-name">Chortle – Meme Sharing Platform</div>
+              <a href="https://chortle-production.up.railway.app" class="project-link">↗ Live</a>
+            </div>
+            <div class="project-desc">
+              Full-stack meme sharing platform with voting system, nested comments, user authentication, and Stripe-powered premium memberships. Gained 500+ active users and 2,000+ memes in the first month.
+            </div>
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">Laravel 10</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Stripe</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Laravel Sanctum</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-header">
+              <div class="project-name">SadiqDev Portfolio</div>
+              <a href="https://sadiqdev-portfolio.vercel.app" class="project-link">↗ Live</a>
+            </div>
+            <div class="project-desc">
+              Personal portfolio with Three.js particle background, blog system, SEO optimization, and a multi-step hire-me form with EmailJS integration.
+            </div>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Three.js</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">EmailJS</span>
+              <span class="tag">Vite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section">
+          <div class="section-title">Education</div>
+          <div class="edu-item">
+            <div class="edu-degree">Self-Taught Full-Stack Developer</div>
+            <div class="edu-school">Online Learning (Udemy, freeCodeCamp, YouTube)</div>
+            <div class="edu-year">2020 – Present · Continuous Learning</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <!-- STATS -->
+        <div class="section">
+          <div class="section-title">At a Glance</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-value">15+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">5★</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">3+</div>
+              <div class="stat-label">Years Exp.</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Commitment</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section">
+          <div class="section-title">Skills</div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Frontend</div>
+            <div class="skill-tags">
+              <span class="skill-tag blue">React</span>
+              <span class="skill-tag blue">JavaScript</span>
+              <span class="skill-tag blue">Tailwind CSS</span>
+              <span class="skill-tag blue">HTML5</span>
+              <span class="skill-tag blue">CSS3</span>
+              <span class="skill-tag blue">Three.js</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Backend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Laravel</span>
+              <span class="skill-tag">PHP</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Sanctum</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Database & Tools</div>
+            <div class="skill-tags">
+              <span class="skill-tag green">MySQL</span>
+              <span class="skill-tag green">Git</span>
+              <span class="skill-tag green">GitHub</span>
+              <span class="skill-tag green">Stripe</span>
+              <span class="skill-tag green">Vite</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Currently Learning</div>
+            <div class="skill-tags">
+              <span class="skill-tag gray">Next.js</span>
+              <span class="skill-tag gray">TypeScript</span>
+              <span class="skill-tag gray">Docker</span>
+              <span class="skill-tag gray">AWS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LINKS -->
+        <div class="section">
+          <div class="section-title">Links</div>
+          <div class="link-item">
+            <div class="link-icon">🌐</div>
+            <a href="https://sadiqdev-portfolio.vercel.app">Portfolio</a>
+          </div>
+          <div class="link-item">
+            <div class="link-icon">⚙</div>
+            <a href="https://github.com/sadiqdev1">github.com/sadiqdev1</a>
+          </div>
+          <div class="link-item">
+            <div class="link-icon">💼</div>
+            <a href="https://linkedin.com/in/sadiqdev1">linkedin.com/in/sadiqdev1</a>
+          </div>
+          <div class="link-item">
+            <div class="link-icon">🐦</div>
+            <a href="https://x.com/sadiqdev1">x.com/sadiqdev1</a>
+          </div>
+        </div>
+
+        <!-- AVAILABILITY -->
+        <div class="availability">
+          <div>
+            <span class="availability-dot"></span>
+            <span class="availability-text">Available for Hire</span>
+          </div>
+          <div class="availability-sub">Open to freelance &amp; full-time remote roles</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

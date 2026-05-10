@@ -70,8 +70,9 @@ export default function About() {
 
             {/* CTA */}
             <a
-              href="/resume.pdf"
-              download
+              href="/resume.html"
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:scale-105 hover:shadow-xl hover:shadow-[var(--accent)]/30 transition-all duration-300"
               style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-mid))' }}
             >
